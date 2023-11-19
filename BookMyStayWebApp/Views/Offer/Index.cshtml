@@ -1,0 +1,44 @@
+﻿@model List<OfferDTO>
+
+<div class="container-md">
+    <div class="row mt-3 mb-3">
+        <div class="col">
+            <h3><i class="bi bi-list-ul"></i> Offers</h3>
+        </div>
+        <div class="col text-end">
+            <a class="btn btn-info" asp-area="" asp-controller="Offer" asp-action="Manage" asp-route-id="0">
+                <i class="bi bi-plus-lg"></i>&nbsp;Add Offer
+            </a>
+        </div>
+    </div>
+    <table class="table caption-top table-bordered - table-striped" id="OfferTable">
+        <thead>
+            <tr>
+                <th scope="col" class="col text-center">#</th>
+                <th scope="col" class="col">Name</th>
+                <th scope="col" class="col-6 text-center">Description</th>
+                <th scope="col" class="col text-center">Discount</th>
+                <th scope="col" class="col text-center">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="col" class="col text-center">@item.OfferId</th>
+                    <th scope="col" class="col">@item.OfferCode</th>
+                    <th scope="col" class="col-6 text-center">@item.OfferDetail</th>
+                    <th scope="col" class="col text-center">@item.OfferDiscountPerc</th>
+                    <th scope="col" class="col text-center">
+                        <a class="btn btn-outline-success" asp-controller="Offer" asp-action="Manage" asp-route-id="@item.OfferId">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a class="btn btn-outline-danger" asp-controller="Offer" asp-action="Delete" asp-route-id="@item.OfferId" onclick="deleteConfirmation(event);">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

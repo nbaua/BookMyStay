@@ -1,0 +1,80 @@
+﻿@model ListingDTO
+<h3>Manage Listing</h3>
+
+<form method="post">
+    <div class="row">
+        <div class="col-6">
+            <div class="border p-3 mt-3  has-validation">
+                <input asp-for="ListingId" type="hidden" />
+                <div class="form-floating mb-3">
+                    <input asp-for="Name" class="form-control" placeholder="">
+                    <label asp-for="Name">Name</label>
+                    <div class="has-validation mt-2">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <textarea asp-for="Description" class="form-control" placeholder="" style="height:120px!important" rows="6"></textarea>
+                    <label asp-for="Description">Description</label>
+                    <div class="has-validation mt-2">
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="ListingPrice" class="form-control" placeholder="">
+                    <label asp-for="ListingPrice">Price (Per Day)</label>
+                    <div class="has-validation mt-2">
+                        <span asp-validation-for="ListingPrice" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Category" class="form-control" placeholder="">
+                    <label asp-for="Category">Category</label>
+                    <div class="has-validation mt-2">
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="ImageUrl" class="form-control" placeholder="">
+                    <label asp-for="ImageUrl">ImageUrl</label>
+                    <div class="has-validation mt-2">
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row p-3 mt-3">
+                    <div class="p-3 border bg-light text-end">
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="bi bi-save"></i>&nbsp;@(Model.ListingId == 0 ? "Create" : "Update")
+                        </button>
+                        <a asp-controller="Listing" asp-action="Index" class="btn btn-outline-dark">
+                            <i class="bi bi-arrow-left-short"></i>&nbsp;Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 p-3">
+            @if (Model.ListingId != 0)
+            {
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <img src="@(Model.ImageUrl)" class="card-img-top" alt="@(Model.Name)">
+                            <div class="card-body">
+                                <h5 class="card-title">@(Model.Name)</h5>
+                                <p class="card-text text_fixed">@(Model.Description)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

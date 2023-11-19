@@ -1,0 +1,39 @@
+﻿@model LoginDTO
+
+<h3>Login</h3>
+
+<form method="post">
+    <div class="row">
+        <div class="col-6">
+            <div class="border p-3 mt-3  has-validation">
+                <div class="form-floating mb-3">
+                    <input asp-for="UserName" class="form-control" placeholder="">
+                    <label asp-for="UserName">UserName</label>
+                    <div class="has-validation mt-2">
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Password" class="form-control" placeholder="" type="password" value="Password$123">
+                    <label asp-for="Password">Password</label>
+                    <div class="has-validation mt-2">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="row p-3 mt-3">
+                    <div class="p-3 border bg-light text-end">
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="bi bi-box-arrow-in-right"></i>&nbsp;Login
+                        </button>
+                        <a asp-controller="Offer" asp-action="Index" class="btn btn-outline-dark">
+                            <i class="bi bi-arrow-left-short"></i></i>&nbsp;Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 p-3">
+        </div>
+    </div>
+</form>

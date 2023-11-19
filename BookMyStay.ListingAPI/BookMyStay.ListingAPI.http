@@ -1,0 +1,6 @@
+@BookMyStay.ListingAPI_HostAddress = http://localhost:5016
+
+GET {{BookMyStay.ListingAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

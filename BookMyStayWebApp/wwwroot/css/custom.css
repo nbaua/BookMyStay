@@ -1,0 +1,10 @@
+﻿#title-logo {
+    width: auto;
+    height: 33px !important;
+}
+
+.text_fixed {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: break-spaces;
+}

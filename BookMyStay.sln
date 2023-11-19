@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34112.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MicroAPI", "MicroAPI", "{A03BB0A2-1E08-48B7-A145-120CC682491C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{163225BD-8AFC-4AD5-854B-F0461DFA4BB6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consumer", "Consumer", "{92760652-FBF4-4FB5-A098-C2E1B7E25F6F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Broker", "Broker", "{92AABBFD-4A30-4B78-8A52-4E5C1596CC60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookMyStay.OfferAPI", "BookMyStay.OfferAPI\BookMyStay.OfferAPI.csproj", "{B8F61F29-C186-4BD1-B40C-904C4957D13C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookMyStay.AuthAPI", "BookMyStay.AuthAPI\BookMyStay.AuthAPI.csproj", "{5D4DC0D6-47E9-4921-BE31-2ACACE924C24}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookMyStay.WebApp", "BookMyStayWebApp\BookMyStay.WebApp.csproj", "{9BE2C1AF-5FDA-4510-9F1E-14CBF74A9855}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookMyStay.ListingAPI", "BookMyStay.ListingAPI\BookMyStay.ListingAPI.csproj", "{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A3A01C6-113D-4831-AC92-48C952DD6F10}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8F61F29-C186-4BD1-B40C-904C4957D13C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8F61F29-C186-4BD1-B40C-904C4957D13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8F61F29-C186-4BD1-B40C-904C4957D13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8F61F29-C186-4BD1-B40C-904C4957D13C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D4DC0D6-47E9-4921-BE31-2ACACE924C24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D4DC0D6-47E9-4921-BE31-2ACACE924C24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D4DC0D6-47E9-4921-BE31-2ACACE924C24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D4DC0D6-47E9-4921-BE31-2ACACE924C24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BE2C1AF-5FDA-4510-9F1E-14CBF74A9855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BE2C1AF-5FDA-4510-9F1E-14CBF74A9855}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE2C1AF-5FDA-4510-9F1E-14CBF74A9855}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BE2C1AF-5FDA-4510-9F1E-14CBF74A9855}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B8F61F29-C186-4BD1-B40C-904C4957D13C} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
+		{5D4DC0D6-47E9-4921-BE31-2ACACE924C24} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
+		{9BE2C1AF-5FDA-4510-9F1E-14CBF74A9855} = {92760652-FBF4-4FB5-A098-C2E1B7E25F6F}
+		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58B5B318-516A-433A-A08E-AC0913E5E14D}
+	EndGlobalSection
+EndGlobal

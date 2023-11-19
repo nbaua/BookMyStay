@@ -1,0 +1,50 @@
+﻿@model List<ListingDTO>
+
+<div class="container-md">
+    <div class="row mt-3 mb-3">
+        <div class="col">
+            <h3>
+                <i class="bi bi-house-heart"></i>
+                Popular Stays
+            </h3>
+        </div>
+    </div>
+
+    <div class="container">
+        @{
+            var counter = 0; var isRow = false;
+        }
+
+        <div class="@(isRow==true || counter==0 ? "row m-5" : " mb-5")">
+
+            @foreach (var item in Model)
+            {
+                @if (counter % 3 == 0) { isRow = true; }
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <img src="@item.ImageUrl" class="card-img-top" alt="@item.Name">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text text_fixed">@item.Description.ToString().Substring(0, 75)  ....</p>
+
+                        </div>
+                        <div class="card-footer  bg-dark">
+                            <div class="row">
+                                <div class="col link-warning">
+                                    <i class="bi bi-backpack4"></i>&nbsp; $@item.ListingPrice Per Day
+                                </div>
+                                <div class="col text-end">
+                                    <a class="btn btn-sm btn-success" asp-controller="Home" asp-action="Detail" asp-route-id="@item.ListingId">
+                                        <i class="bi bi-home"></i>More Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                counter += 1;
+            }
+        </div>
+    </div>
+</div>

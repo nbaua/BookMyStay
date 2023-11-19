@@ -1,0 +1,48 @@
+﻿<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (TempData["Success"] != null)
+{
+    <script>
+        var _title = "@TempData["Success"]";
+        Swal.fire(
+            {
+                title: _title,
+                text: '',
+                showConfirmButton: false,
+                showCancelButton: false,
+                toast: true,
+                timer: 3000,
+                timerProgressBar: true,
+                position: 'top-right',
+                animation: false,
+                background: '#28a745',
+                color: '#ffffff',
+                icon: 'success',
+            }
+        )
+    </script>
+}
+@if (TempData["Error"] != null)
+{
+
+    <script>
+        var _title = "@TempData["Error"]";
+        Swal.fire(
+            {
+                title: _title,
+                text: '',
+                showConfirmButton: false,
+                showCancelButton: false,
+                toast: true,
+                timer: 3000,
+                timerProgressBar: true,
+                position: 'top-right',
+                animation: false,
+                background: '#dc3545',
+                color: '#ffffff',
+                icon: 'error'
+            }
+        )
+    </script>
+}

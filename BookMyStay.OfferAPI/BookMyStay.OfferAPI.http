@@ -1,0 +1,6 @@
+@BookMyStay.OfferAPI_HostAddress = http://localhost:5072
+
+GET {{BookMyStay.OfferAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

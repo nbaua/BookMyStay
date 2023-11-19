@@ -1,0 +1,6 @@
+@BookMyStay.AuthAPI_HostAddress = http://localhost:5024
+
+GET {{BookMyStay.AuthAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
