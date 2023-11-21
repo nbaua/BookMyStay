@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyStay.BookingAPI", "BookMyStay.BookingAPI\BookMyStay.BookingAPI.csproj", "{70E79BC7-1A6C-4886-8A13-DB190BC532B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70E79BC7-1A6C-4886-8A13-DB190BC532B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70E79BC7-1A6C-4886-8A13-DB190BC532B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70E79BC7-1A6C-4886-8A13-DB190BC532B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70E79BC7-1A6C-4886-8A13-DB190BC532B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{5D4DC0D6-47E9-4921-BE31-2ACACE924C24} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
 		{9BE2C1AF-5FDA-4510-9F1E-14CBF74A9855} = {92760652-FBF4-4FB5-A098-C2E1B7E25F6F}
 		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
+		{70E79BC7-1A6C-4886-8A13-DB190BC532B5} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58B5B318-516A-433A-A08E-AC0913E5E14D}
