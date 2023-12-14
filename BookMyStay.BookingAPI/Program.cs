@@ -1,5 +1,6 @@
 using AutoMapper;
 using BookMyStay.BookingAPI.Data;
+using BookMyStay.BookingAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -24,6 +25,16 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 #endregion
+
+//for inter service communication
+builder.Services.AddScoped<IListingService, ListingService>();
+builder.Services.AddHttpClient("Listing",
+    c=>c.BaseAddress= new Uri(builder.Configuration["ServiceUrls:ListingAPI"]));
+
+builder.Services.AddScoped<IOfferService, OfferService>();
+builder.Services.AddHttpClient("Offer",
+    c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:OfferAPI"]));
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
