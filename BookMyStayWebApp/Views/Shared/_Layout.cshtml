@@ -32,7 +32,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-controller="Offer" asp-action="Index">Offers</a></li>
                                 <li><a class="dropdown-item" asp-controller="Listing" asp-action="Index">Listing</a></li>
-                                <li><a class="dropdown-item" href="#">Bookings</a></li>
+                                @* <li><a class="dropdown-item" asp-controller="Booking" asp-action="Index">Bookings</a></li> *@
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">More</a></li>
                             </ul>
@@ -51,6 +51,9 @@
                         }
                         else
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="Index"><i class="bi bi-luggage-fill"></i></a>
+                            </li>
                             <li class="nav-item dropdown text-dark">
                                 <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Welcome  @User.Claims.Where(c => c.Type == "name").First().Value</a>
                                 <ul class="dropdown-menu">

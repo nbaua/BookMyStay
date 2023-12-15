@@ -8,6 +8,7 @@
         public static string AuthApiEndPoint { get; set; }
         public static string OfferApiEndPoint { get; set; }
         public static string ListingApiEndPoint { get; set; }
+        public static string BookingApiEndPoint { get; set; }
         #endregion
 
         #region Authentication
@@ -40,5 +41,14 @@
         public const string ListingDeleted = "Listing Deleted Successfully!";
         #endregion
 
+        #region Booking
+        public static string BookingApiApplyOfferOnBooking= "/api/booking/ManageOffer";
+        public static string BookingApiGetBookingsByUserId= "/api/booking/GetBookings";
+        public static string BookingApiDeleteBookingsByDetailsId= "/api/booking/Delete";
+        public static string BookingApiManageBooking= "/api/booking/Manage";
+
+        public const string BookingCreated = "Booking Created Successfully!";
+
+        #endregion
     }
 }

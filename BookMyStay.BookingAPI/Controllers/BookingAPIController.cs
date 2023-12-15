@@ -54,12 +54,13 @@ namespace BookMyStay.BookingAPI.Controllers
                 }
 
                 //Apply offer
-                if(!string.IsNullOrEmpty(bookingDTO.BookingItemDTO.OfferCode))
+                if (!string.IsNullOrEmpty(bookingDTO.BookingItemDTO.OfferCode))
                 {
                     OfferDTO offerDTO = await _offerService.GetOfferByCode(bookingDTO.BookingItemDTO.OfferCode);
-                    if(offerDTO != null && bookingDTO.BookingItemDTO.BookingTotal > 0) {
+                    if (offerDTO != null && bookingDTO.BookingItemDTO.BookingTotal > 0)
+                    {
                         bookingDTO.BookingItemDTO.Discount = Math.Round(((bookingDTO.BookingItemDTO.BookingTotal * offerDTO.OfferDiscountPerc) / 100), 2);
-                        bookingDTO.BookingItemDTO.BookingTotal -= (double) bookingDTO.BookingItemDTO.Discount ;
+                        bookingDTO.BookingItemDTO.BookingTotal -= (double)bookingDTO.BookingItemDTO.Discount;
                     }
                 }
 
@@ -108,44 +109,46 @@ namespace BookMyStay.BookingAPI.Controllers
         {
             try
             {
-
-                var BookingItem = await _dbContext.BookingItems.AsNoTracking().FirstOrDefaultAsync(i => i.UserId == bookingDTO.BookingItemDTO.UserId);
-                if (BookingItem == null)
+                //1) Check if there is any existing booking for logged in user - if not create a NEW booking
+                var BookingItemExists = await _dbContext.BookingItems.AsNoTracking().FirstOrDefaultAsync(i => i.UserId == bookingDTO.BookingItemDTO.UserId);
+                if (BookingItemExists == null)
                 {
-                    //Add new booking item along with details
-                    //1. New Booking item
-                    BookingItem NewBookingItem = _mapper.Map<BookingItem>(bookingDTO.BookingItemDTO);
-                    _dbContext.BookingItems.Add(NewBookingItem);
+                    //create the booking item and booking detail
+                    BookingItem bookingItem = _mapper.Map<BookingItem>(bookingDTO.BookingItemDTO);
+                    _dbContext.BookingItems.Add(bookingItem);
                     await _dbContext.SaveChangesAsync();
-                    //2. Add New Booking item ref to details
-                    bookingDTO.BookingDetailsDTO.First().BookingItemId = NewBookingItem.BookingItemId;
+
+                    bookingDTO.BookingDetailsDTO.First().BookingItemId = bookingItem.BookingItemId;
                     _dbContext.BookingDetails.Add(_mapper.Map<BookingDetails>(bookingDTO.BookingDetailsDTO.First()));
+                    
                     await _dbContext.SaveChangesAsync();
+
                 }
+                //2)  Update-insert the booking
                 else
                 {
-                    //Booking item exists and have same booking details
-                    var BookingDetail = await _dbContext.BookingDetails.AsNoTracking().FirstOrDefaultAsync(d => d.BookingItemId == bookingDTO.BookingDetailsDTO.First().BookingItemId
-                    && d.BookingItemId == BookingItem.BookingItemId);
+                    var BookingDetailExists = await _dbContext.BookingDetails.AsNoTracking().FirstOrDefaultAsync(
+                        d => d.ListingId == bookingDTO.BookingDetailsDTO.First().ListingId
+                        && d.BookingItemId == BookingItemExists.BookingItemId);
 
-                    if (BookingDetail == null)
+                    // --2.1 - if user has a booking but not for an existing listing, create NEW
+                    if (BookingDetailExists == null)
                     {
-                        //Add new booking details
-                        bookingDTO.BookingDetailsDTO.First().BookingItemId = BookingItem.BookingItemId;
+                        bookingDTO.BookingDetailsDTO.First().BookingItemId = BookingItemExists.BookingItemId;
                         _dbContext.BookingDetails.Add(_mapper.Map<BookingDetails>(bookingDTO.BookingDetailsDTO.First()));
-                        await _dbContext.SaveChangesAsync();
-
+                        await _dbContext.SaveChangesAsync(); 
                     }
-                    else
+                    else // --2.2 - if user has an existing booking, update the details like no of stay, offer, discount etc
                     {
-                        //update existing booking details
-                        bookingDTO.BookingDetailsDTO.First().DayOfStay += BookingDetail.DayOfStay;
-                        bookingDTO.BookingDetailsDTO.First().BookingItemId = BookingDetail.BookingItemId;
-                        bookingDTO.BookingDetailsDTO.First().BookingDetailId = BookingDetail.BookingDetailId;
+                        bookingDTO.BookingDetailsDTO.First().DayOfStay += BookingDetailExists.DayOfStay;
+                        bookingDTO.BookingDetailsDTO.First().BookingItemId += BookingDetailExists.BookingItemId;
+                        bookingDTO.BookingDetailsDTO.First().BookingDetailId += BookingDetailExists.BookingDetailId;
+                        //bookingDTO.BookingDetailsDTO.First().ListingId += BookingDetailExists.ListingId;
                         _dbContext.BookingDetails.Update(_mapper.Map<BookingDetails>(bookingDTO.BookingDetailsDTO.First()));
                         await _dbContext.SaveChangesAsync();
                     }
                 }
+
                 _responseDTO.Result = bookingDTO;
             }
             catch (Exception ex)
@@ -165,7 +168,7 @@ namespace BookMyStay.BookingAPI.Controllers
                 bookings.OfferCode = bookingDTO.BookingItemDTO.OfferCode;
                 _dbContext.BookingItems.Update(bookings);
                 await _dbContext.SaveChangesAsync();
-                
+
                 _responseDTO.HasError = false;
                 _responseDTO.Result = true;
             }

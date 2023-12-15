@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 Constants.AuthApiEndPoint = builder.Configuration["APIEndPoints:AuthAPI"];
 Constants.OfferApiEndPoint = builder.Configuration["APIEndPoints:OfferAPI"];
 Constants.ListingApiEndPoint = builder.Configuration["APIEndPoints:ListingAPI"];
+Constants.BookingApiEndPoint = builder.Configuration["APIEndPoints:BookingAPI"];
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -19,6 +21,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddHttpClient<IOfferService, OfferService>();
 builder.Services.AddHttpClient<IListingService, ListingService>();
+builder.Services.AddHttpClient<IBookingService, BookingService>();
 
 //register the service base as scoped dependencies
 builder.Services.AddScoped<IServiceBase, ServiceBase>();
@@ -26,6 +29,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenHandler, TokenHandler>();
 builder.Services.AddScoped<IOfferService, OfferService>();
 builder.Services.AddScoped<IListingService, ListingService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
     options =>
