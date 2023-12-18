@@ -48,6 +48,7 @@
         public static string BookingApiManageBooking= "/api/booking/Manage";
 
         public const string BookingCreated = "Booking Created Successfully!";
+        public const string BookingRemoved = "Booking Removed Successfully!";
 
         #endregion
     }

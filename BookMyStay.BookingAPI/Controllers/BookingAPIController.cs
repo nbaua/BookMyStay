@@ -2,6 +2,7 @@
 using BookMyStay.BookingAPI.Data;
 using BookMyStay.BookingAPI.Models;
 using BookMyStay.BookingAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -74,8 +75,8 @@ namespace BookMyStay.BookingAPI.Controllers
             return _responseDTO;
         }
 
-        [HttpPost("Delete")]
-        public async Task<APIResponseDTO> Delete([FromBody] int BookingDetailId)
+        [HttpPost("Delete/{BookingDetailId}")]
+        public async Task<APIResponseDTO> Delete(int BookingDetailId)
         {
             try
             {
@@ -165,17 +166,38 @@ namespace BookMyStay.BookingAPI.Controllers
             try
             {
                 var bookings = _dbContext.BookingItems.First(i => i.UserId == bookingDTO.BookingItemDTO.UserId);
-                bookings.OfferCode = bookingDTO.BookingItemDTO.OfferCode;
-                _dbContext.BookingItems.Update(bookings);
-                await _dbContext.SaveChangesAsync();
+                bool offerCodeExists = false;
+                bool offerCodeEmpty = false;
 
-                _responseDTO.HasError = false;
-                _responseDTO.Result = true;
+                if (!string.IsNullOrEmpty(bookingDTO.BookingItemDTO.OfferCode)) { 
+                    OfferDTO offerDTO = await _offerService.GetOfferByCode(bookingDTO.BookingItemDTO.OfferCode);
+                    offerCodeExists = offerDTO.OfferCode != "";
+                }
+                offerCodeEmpty = string.IsNullOrEmpty(bookingDTO.BookingItemDTO.OfferCode);
+
+                if ((offerCodeExists || offerCodeEmpty ))
+                {
+                    bookings.OfferCode = bookingDTO.BookingItemDTO.OfferCode;
+                    _dbContext.BookingItems.Update(bookings);
+                    await _dbContext.SaveChangesAsync();
+
+                    _responseDTO.HasError = false;
+                    _responseDTO.Result = true;
+                    TempData["Success"] = "Offer Code Applied";
+                }
+                else
+                {
+                    _responseDTO.Result = "Invalid Offer Code.";
+                    TempData["Error"] = "Invalid Offer Code.";
+                    _responseDTO.HasError = true;
+                }
+
             }
             catch (Exception ex)
             {
                 _responseDTO.HasError = true;
                 _responseDTO.Result = ex.Message;
+                TempData["Error"] = "No Offer code Applied.";
             }
             return _responseDTO;
         }

@@ -9,7 +9,7 @@ namespace BookMyStay.OfferAPI.Controllers
 {
     [Route("api/offer")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class OfferAPIController : ControllerBase
     {
         private readonly ApplicationDBContext _dbContext;

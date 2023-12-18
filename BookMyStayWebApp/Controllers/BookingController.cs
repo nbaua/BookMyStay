@@ -1,4 +1,5 @@
-﻿using BookMyStay.WebApp.Models;
+﻿using BookMyStay.WebApp.Helpers;
+using BookMyStay.WebApp.Models;
 using BookMyStay.WebApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,5 +31,54 @@ namespace BookMyStay.WebApp.Controllers
                 return View(new BookingDTO());
             }
          }
+
+        public async Task<IActionResult> Delete(int id) {
+            //var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
+            APIResponseDTO response = await _BookingService.DeleteBookingAsync(id);
+            if (response != null && response.HasError == false)
+            {
+                TempData["Success"] = Constants.BookingRemoved;
+                return RedirectToAction("Index", "Booking");
+            }
+            else
+            {
+                TempData["Error"] = response.Info;
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ManageOffer(BookingDTO bookingDTO)
+        {
+            APIResponseDTO response = await _BookingService.ManageOfferAsync(bookingDTO);
+            if (response != null && response.HasError == false)
+            {
+                TempData["Success"] = Constants.BookingRemoved;
+                return RedirectToAction("Index", "Booking");
+            }
+            else
+            {
+                TempData["Error"] = response.Info;
+                return RedirectToAction("Index", "Booking");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveOffer(BookingDTO bookingDTO)
+        {
+            bookingDTO.BookingItemDTO.OfferCode = "";
+            APIResponseDTO response = await _BookingService.ManageOfferAsync(bookingDTO);
+            if (response != null && response.HasError == false)
+            {
+                TempData["Success"] = Constants.BookingRemoved;
+                return RedirectToAction("Index", "Booking");
+            }
+            else
+            {
+                TempData["Error"] = response.Info;
+                return RedirectToAction("Index", "Booking");
+            }
+        }
+
     }
 }
