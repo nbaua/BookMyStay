@@ -18,8 +18,8 @@
         <table class="table caption-top table-bordered - table-striped" id="ListingTable">
             <thead>
                 <tr>
-                    <th scope="col" class="col text-center">#</th>
-                    <th scope="col" class="col text-center">#</th>
+                    @* <th scope="col" class="col text-center">#</th> *@
+                    <th scope="col" class="col text-center">Listing Preview</th>
                     <th scope="col" class="col">Listing Name</th>
                     <th scope="col" class="col-6 text-center">Description</th>
                     <th scope="col" class="col text-center">Price</th>
@@ -33,7 +33,7 @@
                     @foreach (var item in Model.BookingDetailsDTO)
                     {
                         <tr>
-                            <td scope="col" class="col text-center">@item.BookingDetailId</td>
+                            @* <td scope="col" class="col text-center">@item.BookingDetailId</td> *@
                             <td><img src="@item.Listing.ImageUrl" class="img-thumbnail" alt="@item.Listing.Name"></td>
                             <td scope="col" class="col-2">@item.Listing.Name</td>
                             <td scope="col" class="col-4">@item.Listing.Description</td>
@@ -49,24 +49,36 @@
                             </td>
                         </tr>
                     }
+                    <tr class="bg-dark bg-gradient w-50 text-white">
+                        <td colspan="6" class="text-end">
+                            <div>Booking Total: <span class="text-warning fw-bold">@Model.BookingItemDTO.BookingTotal</span></div>
+                            Booking Discount: <span class="text-danger fw-bold">@(@Model.BookingItemDTO.Discount.ToString() == "" ? 0 : Model.BookingItemDTO.Discount)</span>
+                        </td>
+                    </tr>
                     <tr>
+                        <td class="text-end text-uppercase align-middle">
+                            Apply Offer Code:
+                        </td>
                         @if (string.IsNullOrEmpty(Model.BookingItemDTO.OfferCode))
                         {
-                            <td scope="col" colspan="3" class="col-2">
-                                Offer Code: <input type="text" id="OfferCode" asp-for="BookingItemDTO.OfferCode" />
+                            <td class="align-middle">
+                                <input type="text" id="OfferCode" asp-for="BookingItemDTO.OfferCode" />
                             </td>
-                            <td><input type="submit" class="btn btn-success" asp-controller="Booking" asp-action="ManageOffer" value="Apply Offer Code" /></td>
+                            <td class="align-middle">
+                                <input type="submit" class="btn btn-success small text-uppercase" asp-controller="Booking" asp-action="ManageOffer" value="Add Offer Code" />
+                            </td>
                         }
                         else
                         {
-                            <td scope="col" colspan="3" class="col-3">
-                                Offer Code: <input type="text" id="OfferCode" class="bg-secondary text-light" style="border:solid 0px!important;padding:5px" asp-for="BookingItemDTO.OfferCode" value="@(Model.BookingItemDTO.OfferCode)" readonly />
+                            <td class="align-middle">
+                                <input type="text" id="OfferCode" class="bg-secondary text-light" style="border:solid 0px!important;padding:5px" asp-for="BookingItemDTO.OfferCode" value="@(Model.BookingItemDTO.OfferCode)" readonly />
                             </td>
-                            <td><input type="submit" class="btn btn-danger" asp-controller="Booking" asp-action="RemoveOffer" value="Remove Offer" /></td>
+                            <td class="align-middle">
+                                <input type="submit" class="btn btn-danger small text-uppercase" asp-controller="Booking" asp-action="RemoveOffer" value="Remove Offer" />
+                            </td>
                         }
-                        <td colspan="3" class="text-end text-danger">
-                            <div class="text-black fw-bold">Booking Total: @Model.BookingItemDTO.BookingTotal</div>
-                            <span class="fw-bold">Booking Discount: @(@Model.BookingItemDTO.Discount.ToString() == "" ? 0 : Model.BookingItemDTO.Discount)</span>
+                        <td colspan="3">
+                            <input type="submit" class="btn btn-success small text-uppercase" asp-controller="Booking" asp-action="CheckOut" value="Proceed 2 CheckOut" />
                         </td>
                     </tr>
                 }
@@ -79,13 +91,6 @@
                     </tr>
                 }
                 <tr>
-                    @if (Model != null && Model.BookingItemDTO.BookingTotal > 0)
-                    {
-                        <td colspan="7" class="text-end text-success">
-                            <span class="text text-danger m-3 small">Keep your online banking details and/or card ready!</span>
-                            <input type="submit" class="btn btn-success" asp-controller="Booking" asp-action="CheckOut" value="Procced for Checkout " />
-                        </td>
-                    }
                 </tr>
             </tbody>
         </table>
