@@ -121,7 +121,7 @@ namespace BookMyStay.BookingAPI.Controllers
 
                     bookingDTO.BookingDetailsDTO.First().BookingItemId = bookingItem.BookingItemId;
                     _dbContext.BookingDetails.Add(_mapper.Map<BookingDetails>(bookingDTO.BookingDetailsDTO.First()));
-                    
+
                     await _dbContext.SaveChangesAsync();
 
                 }
@@ -137,7 +137,7 @@ namespace BookMyStay.BookingAPI.Controllers
                     {
                         bookingDTO.BookingDetailsDTO.First().BookingItemId = BookingItemExists.BookingItemId;
                         _dbContext.BookingDetails.Add(_mapper.Map<BookingDetails>(bookingDTO.BookingDetailsDTO.First()));
-                        await _dbContext.SaveChangesAsync(); 
+                        await _dbContext.SaveChangesAsync();
                     }
                     else // --2.2 - if user has an existing booking, update the details like no of stay, offer, discount etc
                     {
@@ -169,13 +169,14 @@ namespace BookMyStay.BookingAPI.Controllers
                 bool offerCodeExists = false;
                 bool offerCodeEmpty = false;
 
-                if (!string.IsNullOrEmpty(bookingDTO.BookingItemDTO.OfferCode)) { 
+                if (!string.IsNullOrEmpty(bookingDTO.BookingItemDTO.OfferCode))
+                {
                     OfferDTO offerDTO = await _offerService.GetOfferByCode(bookingDTO.BookingItemDTO.OfferCode);
-                    offerCodeExists = offerDTO.OfferCode != "";
+                    offerCodeExists = !string.IsNullOrEmpty(offerDTO.OfferCode);
                 }
                 offerCodeEmpty = string.IsNullOrEmpty(bookingDTO.BookingItemDTO.OfferCode);
 
-                if ((offerCodeExists || offerCodeEmpty ))
+                if ((offerCodeExists || offerCodeEmpty))
                 {
                     bookings.OfferCode = bookingDTO.BookingItemDTO.OfferCode;
                     _dbContext.BookingItems.Update(bookings);
@@ -183,21 +184,21 @@ namespace BookMyStay.BookingAPI.Controllers
 
                     _responseDTO.HasError = false;
                     _responseDTO.Result = true;
-                    TempData["Success"] = "Offer Code Applied";
+                    _responseDTO.Info = "Offer Code Applied";
                 }
                 else
                 {
-                    _responseDTO.Result = "Invalid Offer Code.";
-                    TempData["Error"] = "Invalid Offer Code.";
+                    _responseDTO.Result = false;
                     _responseDTO.HasError = true;
+                    _responseDTO.Info = "Offer Code Not Applied";
                 }
 
             }
             catch (Exception ex)
             {
                 _responseDTO.HasError = true;
-                _responseDTO.Result = ex.Message;
-                TempData["Error"] = "No Offer code Applied.";
+                _responseDTO.Result = false;
+                _responseDTO.Info = ex.Message;
             }
             return _responseDTO;
         }

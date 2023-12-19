@@ -53,7 +53,7 @@ namespace BookMyStay.WebApp.Controllers
             APIResponseDTO response = await _BookingService.ManageOfferAsync(bookingDTO);
             if (response != null && response.HasError == false)
             {
-                TempData["Success"] = Constants.BookingRemoved;
+                TempData["Success"] = Constants.OfferCodeApplied;
                 return RedirectToAction("Index", "Booking");
             }
             else
@@ -70,7 +70,7 @@ namespace BookMyStay.WebApp.Controllers
             APIResponseDTO response = await _BookingService.ManageOfferAsync(bookingDTO);
             if (response != null && response.HasError == false)
             {
-                TempData["Success"] = Constants.BookingRemoved;
+                TempData["Success"] = Constants.OfferCodeRemoved;
                 return RedirectToAction("Index", "Booking");
             }
             else

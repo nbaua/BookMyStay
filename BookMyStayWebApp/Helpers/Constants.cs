@@ -49,6 +49,9 @@
 
         public const string BookingCreated = "Booking Created Successfully!";
         public const string BookingRemoved = "Booking Removed Successfully!";
+        public const string OfferCodeApplied= "Offer Code Applied Successfully!";
+        public const string OfferCodeNotApplied = "Offer Code Not Applied!";
+        public const string OfferCodeRemoved= "Offer Code Removed Successfully!";
 
         #endregion
     }
