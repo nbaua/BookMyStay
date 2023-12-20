@@ -1,5 +1,6 @@
 using AutoMapper;
 using BookMyStay.BookingAPI.Data;
+using BookMyStay.BookingAPI.Helpers;
 using BookMyStay.BookingAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -26,14 +27,19 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 #endregion
 
+
+//register the http client side handler to adding tokens on API
+builder.Services.AddHttpContextAccessor();//Need this for fetching the token from client
+builder.Services.AddScoped<CrossAPIAuthTokenHandler>();//assign the same token to cross API
+
 //for inter service communication
 builder.Services.AddScoped<IListingService, ListingService>();
 builder.Services.AddHttpClient("Listing",
-    c=>c.BaseAddress= new Uri(builder.Configuration["ServiceUrls:ListingAPI"]));
+    c=>c.BaseAddress= new Uri(builder.Configuration["ServiceUrls:ListingAPI"])).AddHttpMessageHandler<CrossAPIAuthTokenHandler>();
 
 builder.Services.AddScoped<IOfferService, OfferService>();
 builder.Services.AddHttpClient("Offer",
-    c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:OfferAPI"]));
+    c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:OfferAPI"])).AddHttpMessageHandler<CrossAPIAuthTokenHandler>();
 
 
 builder.Services.AddControllers();
