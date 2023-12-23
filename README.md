@@ -23,3 +23,7 @@ WIP/Todos
 - Order Tracking And Scheduling - At present the bookings are just simple order placement, without date range specified.
 - Gateway implementation for all microservices (currently kept accessible using API endpoints - todo - invoke via Gateway)
 - Message Broker is to be updated - plans to change to Azure Service Bus 
+
+## Architecturual Overview
+
+![](bms_arch.png)
