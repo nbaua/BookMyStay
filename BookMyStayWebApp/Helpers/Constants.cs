@@ -9,10 +9,15 @@
         public static string OfferApiEndPoint { get; set; }
         public static string ListingApiEndPoint { get; set; }
         public static string BookingApiEndPoint { get; set; }
+
+        public static string BrokerMessageQueue= "BMSMessage";
+        public static string BrokerCheckoutQueue = "BMSCheckout";
+        public static string BrokerPaymentQueue= "BMSPayment";
+
         #endregion
 
         #region Authentication
-        public static string AuthAPIDefaultRoute= "/api/auth";
+        public static string AuthAPIDefaultRoute = "/api/auth";
         public static string AuthAPILoginRoute = "/api/auth/login";
         public static string AuthAPIRegisterRoute = "/api/auth/register";
         public static string AuthAPIAssignRoleRoute = "/api/auth/assignRole";
@@ -42,16 +47,16 @@
         #endregion
 
         #region Booking
-        public static string BookingApiApplyOfferOnBooking= "/api/booking/ManageOffer";
-        public static string BookingApiGetBookingsByUserId= "/api/booking/GetBookings";
-        public static string BookingApiDeleteBookingsByDetailsId= "/api/booking/Delete";
-        public static string BookingApiManageBooking= "/api/booking/Manage";
+        public static string BookingApiApplyOfferOnBooking = "/api/booking/ManageOffer";
+        public static string BookingApiGetBookingsByUserId = "/api/booking/GetBookings";
+        public static string BookingApiDeleteBookingsByDetailsId = "/api/booking/Delete";
+        public static string BookingApiManageBooking = "/api/booking/Manage";
 
         public const string BookingCreated = "Booking Created Successfully!";
         public const string BookingRemoved = "Booking Removed Successfully!";
-        public const string OfferCodeApplied= "Offer Code Applied Successfully!";
+        public const string OfferCodeApplied = "Offer Code Applied Successfully!";
         public const string OfferCodeNotApplied = "Offer Code Not Applied!";
-        public const string OfferCodeRemoved= "Offer Code Removed Successfully!";
+        public const string OfferCodeRemoved = "Offer Code Removed Successfully!";
 
         #endregion
     }

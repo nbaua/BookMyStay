@@ -33,7 +33,7 @@ namespace BookMyStay.WebApp.Controllers
             {
                 return View(new BookingDTO());
             }
-         }
+        }
 
         [Authorize] //Get the BookingDto and send the message to RabbitMQ
         public async Task<IActionResult> CheckOut()
@@ -50,7 +50,7 @@ namespace BookMyStay.WebApp.Controllers
                 bookingDTO.BookingItemDTO.Name = name;
                 bookingDTO.BookingItemDTO.Email = email;
 
-                //await _MessageHandler.PublishMessage("BMSCheckout", bookingDTO);
+                await _MessageHandler.PublishMessage(Constants.BrokerCheckoutQueue, bookingDTO);
 
                 return View(bookingDTO);
             }
@@ -60,7 +60,23 @@ namespace BookMyStay.WebApp.Controllers
             }
         }
 
-        public async Task<IActionResult> Delete(int id) {
+        [Authorize] //Post the BookingDto and process the message
+        [HttpPost]
+        public async Task<IActionResult> CheckOut(BookingDTO bookingDTO)
+        {
+            var name = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Name)?.FirstOrDefault()?.Value;
+            var email = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
+            var userName = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
+
+            await _MessageHandler.PublishMessage(Constants.BrokerPaymentQueue, bookingDTO.BookingItemDTO);
+
+            //to-do - redirect to stripe payment gateway
+            return View(bookingDTO);
+
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
             //var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
             APIResponseDTO response = await _BookingService.DeleteBookingAsync(id);
             if (response != null && response.HasError == false)
