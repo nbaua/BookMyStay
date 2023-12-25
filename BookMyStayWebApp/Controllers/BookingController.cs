@@ -1,4 +1,5 @@
-﻿using BookMyStay.WebApp.Helpers;
+﻿using BookMyStay.MessageBroker;
+using BookMyStay.WebApp.Helpers;
 using BookMyStay.WebApp.Models;
 using BookMyStay.WebApp.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -11,9 +12,11 @@ namespace BookMyStay.WebApp.Controllers
     public class BookingController : Controller
     {
         private readonly IBookingService _BookingService;
-        public BookingController(IBookingService BookingService)
+        private readonly IMessageHandler _MessageHandler;
+        public BookingController(IBookingService BookingService, IMessageHandler MessageHandler)
         {
             _BookingService = BookingService;
+            _MessageHandler = MessageHandler;
         }
 
         [Authorize]
@@ -31,6 +34,31 @@ namespace BookMyStay.WebApp.Controllers
                 return View(new BookingDTO());
             }
          }
+
+        [Authorize] //Get the BookingDto and send the message to RabbitMQ
+        public async Task<IActionResult> CheckOut()
+        {
+            var name = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Name)?.FirstOrDefault()?.Value;
+            var email = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
+            var userName = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
+
+            var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
+            APIResponseDTO response = await _BookingService.GetBookingsByUserIdAsync(userId);
+            if (response != null && response.HasError == false)
+            {
+                BookingDTO bookingDTO = JsonConvert.DeserializeObject<BookingDTO>(Convert.ToString(response.Result));
+                bookingDTO.BookingItemDTO.Name = name;
+                bookingDTO.BookingItemDTO.Email = email;
+
+                //await _MessageHandler.PublishMessage("BMSCheckout", bookingDTO);
+
+                return View(bookingDTO);
+            }
+            else
+            {
+                return View(new BookingDTO());
+            }
+        }
 
         public async Task<IActionResult> Delete(int id) {
             //var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
