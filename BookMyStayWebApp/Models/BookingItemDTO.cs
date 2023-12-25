@@ -16,8 +16,8 @@ namespace BookMyStay.WebApp.Models
         public double BookingTotal { get; set; }
 
         //Additional properties for DB logger
-        public string? username { get; set; }
-        public string? email { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
 
     }
 }
