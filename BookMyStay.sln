@@ -24,7 +24,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookMyStay.BookingAPI", "BookMyStay.BookingAPI\BookMyStay.BookingAPI.csproj", "{70E79BC7-1A6C-4886-8A13-DB190BC532B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyStay.MessageBroker", "BookMyStay.MessageBroker\BookMyStay.MessageBroker.csproj", "{EE265614-525F-438F-8C36-86CC5270B397}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookMyStay.MessageBroker", "BookMyStay.MessageBroker\BookMyStay.MessageBroker.csproj", "{EE265614-525F-438F-8C36-86CC5270B397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyStay.PaymentAPI", "BookMyStay.PaymentAPI\BookMyStay.PaymentAPI.csproj", "{E9355364-F6F8-4EF1-BC4C-F3CFA315C60E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyStay.DBLoggerAPI", "BookMyStay.DBLoggerAPI\BookMyStay.DBLoggerAPI.csproj", "{1957B7E6-02AB-4108-9294-07060F014EAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +60,14 @@ Global
 		{EE265614-525F-438F-8C36-86CC5270B397}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE265614-525F-438F-8C36-86CC5270B397}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE265614-525F-438F-8C36-86CC5270B397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9355364-F6F8-4EF1-BC4C-F3CFA315C60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9355364-F6F8-4EF1-BC4C-F3CFA315C60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9355364-F6F8-4EF1-BC4C-F3CFA315C60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9355364-F6F8-4EF1-BC4C-F3CFA315C60E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1957B7E6-02AB-4108-9294-07060F014EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1957B7E6-02AB-4108-9294-07060F014EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1957B7E6-02AB-4108-9294-07060F014EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1957B7E6-02AB-4108-9294-07060F014EAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +79,8 @@ Global
 		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
 		{70E79BC7-1A6C-4886-8A13-DB190BC532B5} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
 		{EE265614-525F-438F-8C36-86CC5270B397} = {92AABBFD-4A30-4B78-8A52-4E5C1596CC60}
+		{E9355364-F6F8-4EF1-BC4C-F3CFA315C60E} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
+		{1957B7E6-02AB-4108-9294-07060F014EAB} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58B5B318-516A-433A-A08E-AC0913E5E14D}
