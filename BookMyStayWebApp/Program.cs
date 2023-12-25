@@ -1,3 +1,4 @@
+using BookMyStay.MessageBroker;
 using BookMyStay.WebApp.Helpers;
 using BookMyStay.WebApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -16,6 +17,8 @@ Constants.BookingApiEndPoint = builder.Configuration["APIEndPoints:BookingAPI"];
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
+
+builder.Services.AddScoped<IMessageHandler, MessageHandler>(); //RabbitMQ Message Broker Service.
 
 //register end-points with http client
 builder.Services.AddHttpClient<IAuthService, AuthService>();

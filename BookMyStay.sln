@@ -5,8 +5,6 @@ VisualStudioVersion = 17.8.34112.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MicroAPI", "MicroAPI", "{A03BB0A2-1E08-48B7-A145-120CC682491C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{163225BD-8AFC-4AD5-854B-F0461DFA4BB6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consumer", "Consumer", "{92760652-FBF4-4FB5-A098-C2E1B7E25F6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Broker", "Broker", "{92AABBFD-4A30-4B78-8A52-4E5C1596CC60}"
@@ -24,7 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyStay.BookingAPI", "BookMyStay.BookingAPI\BookMyStay.BookingAPI.csproj", "{70E79BC7-1A6C-4886-8A13-DB190BC532B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookMyStay.BookingAPI", "BookMyStay.BookingAPI\BookMyStay.BookingAPI.csproj", "{70E79BC7-1A6C-4886-8A13-DB190BC532B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyStay.MessageBroker", "BookMyStay.MessageBroker\BookMyStay.MessageBroker.csproj", "{EE265614-525F-438F-8C36-86CC5270B397}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +52,10 @@ Global
 		{70E79BC7-1A6C-4886-8A13-DB190BC532B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70E79BC7-1A6C-4886-8A13-DB190BC532B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70E79BC7-1A6C-4886-8A13-DB190BC532B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE265614-525F-438F-8C36-86CC5270B397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE265614-525F-438F-8C36-86CC5270B397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE265614-525F-438F-8C36-86CC5270B397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE265614-525F-438F-8C36-86CC5270B397}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +66,7 @@ Global
 		{9BE2C1AF-5FDA-4510-9F1E-14CBF74A9855} = {92760652-FBF4-4FB5-A098-C2E1B7E25F6F}
 		{A5D1CB19-ECF0-45EA-84BA-E2D5B52B797C} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
 		{70E79BC7-1A6C-4886-8A13-DB190BC532B5} = {A03BB0A2-1E08-48B7-A145-120CC682491C}
+		{EE265614-525F-438F-8C36-86CC5270B397} = {92AABBFD-4A30-4B78-8A52-4E5C1596CC60}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58B5B318-516A-433A-A08E-AC0913E5E14D}
