@@ -14,5 +14,9 @@ namespace BookMyStay.BookingAPI.Models
         public double? Discount { get; set; }
 
         public double BookingTotal { get; set; }
+       
+        //Additional properties for DB logger
+        public string? username { get; set; }
+        public string? email { get; set; }
     }
 }
