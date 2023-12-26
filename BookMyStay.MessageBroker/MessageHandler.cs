@@ -20,10 +20,10 @@ namespace BookMyStay.MessageBroker
             dynamic settings = GetConfig();
 
             //var appConfig = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
-            _hostname = settings["HostName"].ToString();
-            _username = settings["UserName"].ToString();
-            _password = settings["Password"].ToString();
-            _virtualHost = settings["VirtualHost"].ToString();
+            _hostname = settings["MessageBrokerConfig:HostName"].ToString();
+            _username = settings["MessageBrokerConfig:UserName"].ToString();
+            _password = settings["MessageBrokerConfig:Password"].ToString();
+            _virtualHost = settings["MessageBrokerConfig:VirtualHost"].ToString();
         }
 
         Task<string> IMessageHandler.ConsumeMessage(string QueueName)
