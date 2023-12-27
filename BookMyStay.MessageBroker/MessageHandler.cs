@@ -17,63 +17,44 @@ namespace BookMyStay.MessageBroker
 
         public MessageHandler()
         {
+        }
+
+        public static dynamic CreateChannel()
+        {
             dynamic settings = GetConfig();
 
-            //var appConfig = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
-            _hostname = settings["MessageBrokerConfig:HostName"].ToString();
-            _username = settings["MessageBrokerConfig:UserName"].ToString();
-            _password = settings["MessageBrokerConfig:Password"].ToString();
-            _virtualHost = settings["MessageBrokerConfig:VirtualHost"].ToString();
+            ConnectionFactory connection = new ConnectionFactory()
+            {
+                UserName = settings["MessageBrokerConfig:UserName"].ToString(),
+                Password = settings["MessageBrokerConfig:Password"].ToString(),
+                HostName = settings["MessageBrokerConfig:HostName"].ToString(),
+                VirtualHost = settings["MessageBrokerConfig:VirtualHost"].ToString(),
+            };
+            connection.DispatchConsumersAsync = true;
+            var channel = connection.CreateConnection();
+            return channel;
         }
 
         Task<string> IMessageHandler.ConsumeMessage(string QueueName)
         {
-            var factory = new ConnectionFactory()
-            {
-                HostName = _hostname,
-                UserName = _username,
-                Password = _password,
-                VirtualHost = _virtualHost
-            };
 
-            var connection = factory.CreateConnection();         // Get connection
-            var channel = connection.CreateChannel();    // Get the channel - alternatively can use the CreateModel() as well.
+            var channel = CreateChannel();    // Get the channel - alternatively can use the CreateModel() as well.
 
             channel.QueueDeclare(QueueName, durable: true, exclusive: false, autoDelete: false); //exclusive: true, Gives error
-            //channel.BasicQos(100,10,true); // Per consumer limit
 
             BasicGetResult result = channel.BasicGet(QueueName, false);
             if (result != null)
             {
-                Console.WriteLine($"Message: {Encoding.UTF8.GetString(result.Body.ToArray())}");
+                //Console.WriteLine($"Message: {Encoding.UTF8.GetString(result.Body.ToArray())}");
                 channel.BasicAck(result.DeliveryTag, false);
-                Console.WriteLine("Press any key to stop consuming messages.");
             }
-
-            //channel.Dispose();
-            connection.Dispose();
 
             return Task.FromResult("Done");
         }
 
-        private static void OnNewMessageReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Console.WriteLine($"Message: {Encoding.UTF8.GetString(e.Body.ToArray())}");
-            Console.WriteLine("Press any key to stop consuming message.");
-        }
-
         Task IMessageHandler.PublishMessage<T>(string QueueName, T message)
         {
-            var factory = new ConnectionFactory()
-            {
-                HostName = _hostname,
-                UserName = _username,
-                Password = _password,
-                VirtualHost = _virtualHost
-            };
-
-            var connection = factory.CreateConnection();         // Get connection
-            var channel = connection.CreateChannel();    // Get the channel - alternatively can use the CreateModel() as well.
+            var channel = CreateChannel();    // Get the channel - alternatively can use the CreateModel() as well.
 
             var messageString = JsonSerializer.Serialize(message);
             var body = Encoding.UTF8.GetBytes(messageString);
@@ -81,7 +62,6 @@ namespace BookMyStay.MessageBroker
             channel.QueueDeclare(QueueName, durable: true, exclusive: false, autoDelete: false);
             channel.BasicPublish("", QueueName, body: body);
 
-            connection.Dispose();
             return Task.CompletedTask;
         }
 
