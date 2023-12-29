@@ -22,7 +22,7 @@ namespace BookMyStay.DBLoggerAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookMyStay.DBLoggerAPI.Models.DBLogger", b =>
+            modelBuilder.Entity("BookMyStay.DBLoggerAPI.Models.DBLoggerLogDTO", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace BookMyStay.DBLoggerAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DBLoggers");
+                    b.ToTable("DBLogger");
                 });
 #pragma warning restore 612, 618
         }

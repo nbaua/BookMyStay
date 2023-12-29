@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookMyStay.DBLoggerAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDatabaseLoggerAPItoDB : Migration
+    public partial class add_dblogger_tables_to_database : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "DBLoggers",
+                name: "DBLoggerLog",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -24,7 +24,7 @@ namespace BookMyStay.DBLoggerAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DBLoggers", x => x.Id);
+                    table.PrimaryKey("PK_DBLoggerLog", x => x.Id);
                 });
         }
 
@@ -32,7 +32,7 @@ namespace BookMyStay.DBLoggerAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DBLoggers");
+                name: "DBLoggerLog");
         }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookMyStay.DBLoggerAPI.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231225135440_AddDatabaseLoggerAPItoDB")]
-    partial class AddDatabaseLoggerAPItoDB
+    [Migration("20231228115055_add_dblogger_tables_to_database")]
+    partial class add_dblogger_tables_to_database
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace BookMyStay.DBLoggerAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookMyStay.DBLoggerAPI.Models.DBLogger", b =>
+            modelBuilder.Entity("BookMyStay.DBLoggerAPI.Models.DBLoggerLogDTO", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +50,7 @@ namespace BookMyStay.DBLoggerAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DBLoggers");
+                    b.ToTable("DBLogger");
                 });
 #pragma warning restore 612, 618
         }
