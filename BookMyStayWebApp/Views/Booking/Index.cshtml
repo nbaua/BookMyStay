@@ -51,8 +51,8 @@
                     }
                     <tr class="bg-dark bg-gradient w-50 text-white">
                         <td colspan="6" class="text-end">
-                            <div>Booking Total: <span class="text-warning fw-bold">@Model.BookingItemDTO.BookingTotal</span></div>
-                            Booking Discount: <span class="text-danger fw-bold">@(@Model.BookingItemDTO.Discount.ToString() == "" ? 0 : Model.BookingItemDTO.Discount)</span>
+                            <div>Booking Total:<i class="bi bi-currency-rupee"></i> <span class="text-warning fw-bold">@Model.BookingItemDTO.BookingTotal</span></div>
+                            Booking Discount:<i class="bi bi-currency-rupee"></i> <span class="text-danger fw-bold">@(@Model.BookingItemDTO.Discount.ToString() == "" ? 0 : Model.BookingItemDTO.Discount)</span>
                         </td>
                     </tr>
                     <tr>

@@ -83,6 +83,10 @@ namespace BookMyStay.WebApp.Controllers
             {
                 TempData["Error"] = response.Info;
             }
+            else
+            {
+                TempData["Success"] = "Logged into DB";
+            }
 
             //to-do - redirect to stripe payment gateway
             return View(bookingDTO);
