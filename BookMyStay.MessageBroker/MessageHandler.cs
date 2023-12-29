@@ -26,7 +26,7 @@ namespace BookMyStay.MessageBroker
             _virtualHost = settings["MessageBrokerConfig:VirtualHost"].ToString();
         }
 
-        Task<string> IMessageHandler.ConsumeMessage(string QueueName)
+        Task<dynamic> IMessageHandler.ConsumeMessage(string QueueName)
         {
             var factory = new ConnectionFactory()
             {
@@ -40,20 +40,22 @@ namespace BookMyStay.MessageBroker
             var channel = connection.CreateChannel();    // Get the channel - alternatively can use the CreateModel() as well.
 
             channel.QueueDeclare(QueueName, durable: true, exclusive: false, autoDelete: false); //exclusive: true, Gives error
-            //channel.BasicQos(100,10,true); // Per consumer limit
+                                                                                                 //channel.BasicQos(100, 10, true); // Per consumer limit
+            //var consumer = new EventingBasicConsumer(channel);
+            //channel.BasicConsume(QueueName, true, consumer);
 
             BasicGetResult result = channel.BasicGet(QueueName, false);
             if (result != null)
             {
-                Console.WriteLine($"Message: {Encoding.UTF8.GetString(result.Body.ToArray())}");
+                Console.WriteLine($"Message: {Encoding.UTF8.GetString(result.Body.ToArray())}");//additional log
                 channel.BasicAck(result.DeliveryTag, false);
-                Console.WriteLine("Press any key to stop consuming messages.");
+                Console.WriteLine("Done consuming message...");
+                return Task.FromResult<dynamic>(Encoding.UTF8.GetString(result.Body.ToArray()));
             }
 
             //channel.Dispose();
             connection.Dispose();
-
-            return Task.FromResult("Done");
+            return Task.FromResult<dynamic>(string.Empty);
         }
 
         private static void OnNewMessageReceived(object sender, BasicDeliverEventArgs e)

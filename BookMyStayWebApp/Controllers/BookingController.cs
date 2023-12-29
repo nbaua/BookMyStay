@@ -13,10 +13,16 @@ namespace BookMyStay.WebApp.Controllers
     {
         private readonly IBookingService _BookingService;
         private readonly IMessageHandler _MessageHandler;
-        public BookingController(IBookingService BookingService, IMessageHandler MessageHandler)
+        private readonly IDBLoggerService _DBLoggerService;
+
+        public BookingController(IBookingService BookingService
+            , IMessageHandler MessageHandler,
+            IDBLoggerService DBLoggerService
+            )
         {
             _BookingService = BookingService;
             _MessageHandler = MessageHandler;
+            _DBLoggerService = DBLoggerService;
         }
 
         [Authorize]
@@ -68,7 +74,15 @@ namespace BookMyStay.WebApp.Controllers
             var email = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
             var userName = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
 
-            await _MessageHandler.PublishMessage(Constants.BrokerPaymentQueue, bookingDTO.BookingItemDTO);
+            //await _MessageHandler.PublishMessage(Constants.BrokerPaymentQueue, bookingDTO.BookingItemDTO);
+            //var result = await _MessageHandler.ConsumeMessage(Constants.BrokerCheckoutQueue);
+
+            APIResponseDTO response = await _DBLoggerService.LogToDB(Constants.BrokerCheckoutQueue);
+
+            if(response.HasError)
+            {
+                TempData["Error"] = response.Info;
+            }
 
             //to-do - redirect to stripe payment gateway
             return View(bookingDTO);

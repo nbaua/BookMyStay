@@ -7,7 +7,7 @@ namespace BookMyStay.DBLoggerAPI.Data
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
 
-        public DbSet<DBLogger> DBLoggers { get; set; }
+        public DbSet<DBLoggerLogDTO> DBLoggers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

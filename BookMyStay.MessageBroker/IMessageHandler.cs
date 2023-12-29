@@ -2,7 +2,7 @@
 {
     public interface IMessageHandler
     {
-        Task<string> ConsumeMessage(string QueueName);
+        Task<dynamic> ConsumeMessage(string QueueName);
         Task PublishMessage<T>(string QueueName, T message);
     }
 }

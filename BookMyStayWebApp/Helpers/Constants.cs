@@ -9,6 +9,7 @@
         public static string OfferApiEndPoint { get; set; }
         public static string ListingApiEndPoint { get; set; }
         public static string BookingApiEndPoint { get; set; }
+        public static string DBLoggerApiEndPoint { get; set; }
 
         public static string BrokerMessageQueue= "BMSMessage";
         public static string BrokerCheckoutQueue = "BMSCheckout";
@@ -59,5 +60,13 @@
         public const string OfferCodeRemoved = "Offer Code Removed Successfully!";
 
         #endregion
+
+        #region DBLogger
+        public static string DBLoggerApiLogQueue = "/api/logger/LogQueue";
+        
+        public const string DBLogCreated = "DB Log Created Successfully!";
+        public const string DBLogNotCreated = "DB Log Can Not Be Created!";
+        #endregion
+
     }
 }
