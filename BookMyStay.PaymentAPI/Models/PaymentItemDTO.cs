@@ -11,7 +11,7 @@
         public string? Name { get; set; }
         public string? Email { get; set; }
 
-        public IEnumerable<PaymentItemDetails> PaymentItemDetails { get; set; } //Booking details
+        public IEnumerable<PaymentItemDetailsDTO> PaymentItemDetails { get; set; } //Booking details
 
         //PAYMENT GATEWAY SPECIFIC PROPERTIES
         public string PaymentStatus { get; set; } = "INPROCESS"; //Ideally this could be an ENUM instead of a magic string.
