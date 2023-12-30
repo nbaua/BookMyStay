@@ -11,6 +11,7 @@ Constants.AuthApiEndPoint = builder.Configuration["APIEndPoints:AuthAPI"];
 Constants.OfferApiEndPoint = builder.Configuration["APIEndPoints:OfferAPI"];
 Constants.ListingApiEndPoint = builder.Configuration["APIEndPoints:ListingAPI"];
 Constants.BookingApiEndPoint = builder.Configuration["APIEndPoints:BookingAPI"];
+Constants.PaymentApiEndPoint = builder.Configuration["APIEndPoints:PaymentAPI"];
 Constants.DBLoggerApiEndPoint = builder.Configuration["APIEndPoints:DBLoggerAPI"];
 
 
@@ -26,6 +27,7 @@ builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddHttpClient<IOfferService, OfferService>();
 builder.Services.AddHttpClient<IListingService, ListingService>();
 builder.Services.AddHttpClient<IBookingService, BookingService>();
+builder.Services.AddHttpClient<IPaymentService, PaymentService>();
 builder.Services.AddHttpClient<IDBLoggerService, DBLoggerService>();
 
 //register the service base as scoped dependencies
@@ -35,6 +37,7 @@ builder.Services.AddScoped<ITokenHandler, TokenHandler>();
 builder.Services.AddScoped<IOfferService, OfferService>();
 builder.Services.AddScoped<IListingService, ListingService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IDBLoggerService, DBLoggerService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
