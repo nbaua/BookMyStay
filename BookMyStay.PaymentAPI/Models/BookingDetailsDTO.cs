@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace BookMyStay.PaymentAPI.Models
+﻿namespace BookMyStay.PaymentAPI.Models
 {
     public class BookingDetailsDTO
     {

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Azure;
 using BookMyStay.DBLoggerAPI.Data;
 using BookMyStay.DBLoggerAPI.Models;
 using BookMyStay.MessageBroker;
@@ -28,7 +27,7 @@ namespace BookMyStay.DBLoggerAPI.Services
             var message = await _MessageHandler.ConsumeMessage(queueName);
             if (message == null)
             {
-                return new APIResponseDTO{ HasError = true, Info="No messages found or error occurred, check logs", Result = "" };
+                return new APIResponseDTO { HasError = true, Info = "No messages found or error occurred, check logs", Result = "" };
             }
             else
             {
@@ -39,7 +38,8 @@ namespace BookMyStay.DBLoggerAPI.Services
                 try
                 {
                     BookingDTO bookingDTO = JsonConvert.DeserializeObject<BookingDTO>(Convert.ToString(message));
-                    if (bookingDTO != null) {
+                    if (bookingDTO != null)
+                    {
                         LoggerLogDTO.UserId = bookingDTO.BookingItemDTO.UserId;
                     }
                 }
@@ -53,7 +53,7 @@ namespace BookMyStay.DBLoggerAPI.Services
                 DBLoggerLogDTO LoggerLog = _mapper.Map<DBLoggerLogDTO>(LoggerLogDTO);
                 _dbContext.DBLoggers.Add(LoggerLog);
                 _dbContext.SaveChanges();
-                
+
                 Console.WriteLine(message); //to-do save messages to tge database
 
                 return new APIResponseDTO { HasError = false, Info = "", Result = message }; ;

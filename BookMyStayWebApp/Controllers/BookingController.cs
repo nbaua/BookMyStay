@@ -79,7 +79,7 @@ namespace BookMyStay.WebApp.Controllers
 
             APIResponseDTO response = await _DBLoggerService.LogToDB(Constants.BrokerCheckoutQueue);
 
-            if(response.HasError)
+            if (response.HasError)
             {
                 TempData["Error"] = response.Info;
             }

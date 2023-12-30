@@ -20,7 +20,7 @@ namespace BookMyStay.WebApp.Services
                 RequestUrl = Constants.AuthApiEndPoint + Constants.AuthAPIAssignRoleRoute,
                 Payload = registerDTO,
                 Token = string.Empty,
-            },withToken:true);
+            }, withToken: true);
         }
 
         public async Task<APIResponseDTO> LoginAsync(LoginDTO loginDTO)
@@ -30,7 +30,7 @@ namespace BookMyStay.WebApp.Services
                 RequestType = "POST",
                 RequestUrl = Constants.AuthApiEndPoint + Constants.AuthAPILoginRoute,
                 Payload = loginDTO,
-                Token= string.Empty,
+                Token = string.Empty,
             }, withToken: false);
         }
 

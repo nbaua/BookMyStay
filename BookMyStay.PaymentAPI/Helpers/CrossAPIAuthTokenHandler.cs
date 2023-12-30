@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace BookMyStay.PaymentAPI.Helpers
 {
-    public class CrossAPIAuthTokenHandler: DelegatingHandler
+    public class CrossAPIAuthTokenHandler : DelegatingHandler
     {
         private readonly IHttpContextAccessor _contextAccessor;
         public CrossAPIAuthTokenHandler(IHttpContextAccessor contextAccessor)

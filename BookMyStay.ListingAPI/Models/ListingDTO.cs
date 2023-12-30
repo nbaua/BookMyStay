@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BookMyStay.ListingAPI.Models
+﻿namespace BookMyStay.ListingAPI.Models
 {
     public class ListingDTO
     {

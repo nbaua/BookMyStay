@@ -1,8 +1,6 @@
 ﻿using BookMyStay.AuthAPI.Models;
 using BookMyStay.AuthAPI.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace BookMyStay.AuthAPI.Controllers
 {
@@ -47,13 +45,14 @@ namespace BookMyStay.AuthAPI.Controllers
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
         {
             var response = await _authService.Login(loginDTO);
-            if(response.Token != null)
+            if (response.Token != null)
             {
                 _responseDTO.Result = response;
                 _responseDTO.Info = "Success";
                 _responseDTO.HasError = false;
             }
-            else { 
+            else
+            {
                 _responseDTO.Result = response;
                 _responseDTO.Info = "Error";
                 _responseDTO.HasError = true;

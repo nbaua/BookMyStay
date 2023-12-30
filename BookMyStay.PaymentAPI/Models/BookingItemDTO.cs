@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace BookMyStay.PaymentAPI.Models
+﻿namespace BookMyStay.PaymentAPI.Models
 {
     public class BookingItemDTO
     {
@@ -14,7 +11,7 @@ namespace BookMyStay.PaymentAPI.Models
         public double? Discount { get; set; }
 
         public double BookingTotal { get; set; }
-       
+
         //Additional properties for DB logger
         public string? Name { get; set; }
         public string? Email { get; set; }

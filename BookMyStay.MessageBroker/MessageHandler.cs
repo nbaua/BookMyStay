@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Configuration;
-using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
@@ -18,14 +16,16 @@ namespace BookMyStay.MessageBroker
         public MessageHandler()
         {
             dynamic settings = GetConfig();
-            try { 
-            //var appConfig = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
-            _hostname = settings["MessageBrokerConfig:HostName"].ToString();
-            _username = settings["MessageBrokerConfig:UserName"].ToString();
-            _password = settings["MessageBrokerConfig:Password"].ToString();
-            _virtualHost = settings["MessageBrokerConfig:VirtualHost"].ToString();
+            try
+            {
+                //var appConfig = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+                _hostname = settings["MessageBrokerConfig:HostName"].ToString();
+                _username = settings["MessageBrokerConfig:UserName"].ToString();
+                _password = settings["MessageBrokerConfig:Password"].ToString();
+                _virtualHost = settings["MessageBrokerConfig:VirtualHost"].ToString();
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.ToString());
             }
         }
@@ -45,8 +45,8 @@ namespace BookMyStay.MessageBroker
 
             channel.QueueDeclare(QueueName, durable: true, exclusive: false, autoDelete: false); //exclusive: true, Gives error
                                                                                                  //channel.BasicQos(100, 10, true); // Per consumer limit
-            //var consumer = new EventingBasicConsumer(channel);
-            //channel.BasicConsume(QueueName, true, consumer);
+                                                                                                 //var consumer = new EventingBasicConsumer(channel);
+                                                                                                 //channel.BasicConsume(QueueName, true, consumer);
 
             BasicGetResult result = channel.BasicGet(QueueName, false);
             if (result != null)

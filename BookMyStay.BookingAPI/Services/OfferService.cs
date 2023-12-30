@@ -3,14 +3,14 @@ using Newtonsoft.Json;
 
 namespace BookMyStay.BookingAPI.Services
 {
-    public class OfferService: IOfferService
+    public class OfferService : IOfferService
     {
         private readonly IHttpClientFactory _httpClientFactory;
         public OfferService(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
-        
+
         public async Task<OfferDTO> GetOfferByCode(string offerCode)
         {
             var client = _httpClientFactory.CreateClient("Offer");

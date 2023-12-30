@@ -7,13 +7,14 @@ namespace BookMyStay.WebApp.Services
     {
         private readonly IServiceBase _service;
 
-        public BookingService(IServiceBase service) {
+        public BookingService(IServiceBase service)
+        {
             _service = service;
         }
 
         public async Task<APIResponseDTO> ManageOfferAsync(BookingDTO offerDTO)
         {
-            return await _service.SendRequestAsync(new APIRequestDTO() 
+            return await _service.SendRequestAsync(new APIRequestDTO()
             {
                 RequestType = "POST",
                 RequestUrl = Constants.BookingApiEndPoint + Constants.BookingApiApplyOfferOnBooking,
@@ -38,7 +39,7 @@ namespace BookMyStay.WebApp.Services
             return await _service.SendRequestAsync(new APIRequestDTO()
             {
                 RequestType = "GET",
-                RequestUrl = Constants.BookingApiEndPoint + Constants.BookingApiGetBookingsByUserId +  $"/{userId}",
+                RequestUrl = Constants.BookingApiEndPoint + Constants.BookingApiGetBookingsByUserId + $"/{userId}",
                 Payload = string.Empty,
                 Token = ""
             });

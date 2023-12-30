@@ -5,6 +5,6 @@ namespace BookMyStay.ListingAPI.Models
     {
         public object? Result { get; set; }
         public string? Info { get; set; }
-        public bool HasError{ get; set; }
+        public bool HasError { get; set; }
     }
 }

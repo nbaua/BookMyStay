@@ -9,6 +9,6 @@ namespace BookMyStay.WebApp.Services
         Task<APIResponseDTO> DeleteOfferAsync(int id);
         Task<APIResponseDTO> GetAllOffersAsync();
         Task<APIResponseDTO> GetOfferByIdAsync(int id);
-        Task<APIResponseDTO> GetOfferByCodeAsync(string code); 
+        Task<APIResponseDTO> GetOfferByCodeAsync(string code);
     }
 }

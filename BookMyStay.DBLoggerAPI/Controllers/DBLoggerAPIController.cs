@@ -2,7 +2,6 @@
 using BookMyStay.DBLoggerAPI.Models;
 using BookMyStay.DBLoggerAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace BookMyStay.DBLoggerAPI.Controllers
 {

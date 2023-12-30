@@ -11,7 +11,8 @@ namespace BookMyStay.AuthAPI.Services
     public class TokenGenerator : ITokenGenerator
     {
         private readonly JWTConfig _jwtConfig;
-        public TokenGenerator(IOptions<JWTConfig> jwtConfig) {
+        public TokenGenerator(IOptions<JWTConfig> jwtConfig)
+        {
             _jwtConfig = jwtConfig.Value;
         }
         public string GenerateToken(IdentityUser identityUser, string role)
@@ -29,7 +30,7 @@ namespace BookMyStay.AuthAPI.Services
                 new Claim(ClaimTypes.Role, role)
             };
 
-            
+
 
             var claimTokenDescriptor = new SecurityTokenDescriptor
             {

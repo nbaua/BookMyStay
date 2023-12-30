@@ -1,7 +1,5 @@
 ﻿using BookMyStay.WebApp.Models;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
-using System.Net;
 using System.Text;
 
 namespace BookMyStay.WebApp.Services

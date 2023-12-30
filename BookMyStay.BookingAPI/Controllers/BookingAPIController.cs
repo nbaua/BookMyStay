@@ -2,8 +2,6 @@
 using BookMyStay.BookingAPI.Data;
 using BookMyStay.BookingAPI.Models;
 using BookMyStay.BookingAPI.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

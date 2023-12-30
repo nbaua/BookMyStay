@@ -3,7 +3,6 @@ using BookMyStay.WebApp.Models;
 using BookMyStay.WebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace BookMyStay.WebApp.Controllers
 {

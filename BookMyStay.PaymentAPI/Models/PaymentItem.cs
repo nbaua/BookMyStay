@@ -18,8 +18,8 @@ namespace BookMyStay.PaymentAPI.Models
         //PAYMENT GATEWAY SPECIFIC PROPERTIES
         public string PaymentStatus { get; set; } = "INPROCESS"; //Ideally this could be an ENUM instead of a magic string.
         public DateTime PaymentDate { get; set; } = DateTime.Now;
-        public string? StripeSessionId{ get; set; } //For Stripe payment gateway
-        public string? PaymentIntentId{ get; set; } //For Stripe payment gateway
+        public string? StripeSessionId { get; set; } //For Stripe payment gateway
+        public string? PaymentIntentId { get; set; } //For Stripe payment gateway
 
     }
 }

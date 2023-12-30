@@ -12,7 +12,7 @@ namespace BookMyStay.BookingAPI.Models
         public string? UserId { get; set; } //Logged-in User GUID
 
         public string? OfferCode { get; set; } //If code is applied
-        
+
         [NotMapped]
         public double? Discount { get; set; }
 

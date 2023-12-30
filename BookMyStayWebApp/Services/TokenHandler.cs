@@ -9,8 +9,8 @@ namespace BookMyStay.WebApp.Services
         {
             _httpContextAccessor = httpContextAccessor;
         }
-        
-        public void SetToken( string tokenValue)
+
+        public void SetToken(string tokenValue)
         {
             string Key = Constants.TokenKeyPrefix;
             _httpContextAccessor.HttpContext?.Response.Cookies.Append(Key, tokenValue);

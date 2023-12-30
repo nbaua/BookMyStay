@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BookMyStay.AuthAPI.Data;
+﻿using BookMyStay.AuthAPI.Data;
 using BookMyStay.AuthAPI.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -60,7 +59,7 @@ namespace BookMyStay.AuthAPI.Services
             else
             {
                 var role = await _userManager.GetRolesAsync(user);
-                var token = _tokenGenerator.GenerateToken(user,role.FirstOrDefault());
+                var token = _tokenGenerator.GenerateToken(user, role.FirstOrDefault());
                 return new UserDTO
                 {
                     Id = user.Id,

@@ -2,7 +2,6 @@
 using BookMyStay.OfferAPI.Data;
 using BookMyStay.OfferAPI.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookMyStay.OfferAPI.Controllers
@@ -85,7 +84,7 @@ namespace BookMyStay.OfferAPI.Controllers
 
         [HttpPost]
         [Route("")]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public APIResponseDTO Post([FromBody] OfferDTO offerDto)
         {
             try
@@ -136,7 +135,7 @@ namespace BookMyStay.OfferAPI.Controllers
         {
             try
             {
-                Offer offer = _dbContext.Offers.First(x=> x.OfferId == id);
+                Offer offer = _dbContext.Offers.First(x => x.OfferId == id);
                 _dbContext.Offers.Remove(offer);
                 _dbContext.SaveChanges();
 

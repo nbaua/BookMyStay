@@ -10,9 +10,9 @@ namespace BookMyStay.PaymentAPI.Models
         public int PaymentItemId { get; set; }
         [ForeignKey("PaymentItemId")]
         public PaymentItem? PaymentItem { get; set; }
-        public int ListingId { get; set;}
+        public int ListingId { get; set; }
         public double BookingPrice { get; set; } //Amount at which the booking was done.
-        
+
         [NotMapped]
         public ListingDTO? Listing { get; set; }
         public int DayOfStay { get; set; }

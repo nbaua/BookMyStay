@@ -7,7 +7,8 @@ namespace BookMyStay.WebApp.Services
     {
         private readonly IServiceBase _service;
 
-        public OfferService(IServiceBase service) { 
+        public OfferService(IServiceBase service)
+        {
             _service = service;
         }
 
@@ -49,7 +50,7 @@ namespace BookMyStay.WebApp.Services
             return await _service.SendRequestAsync(new APIRequestDTO() //.SendRequestAsync<APIResponseDTO>(new APIRequestDTO()
             {
                 RequestType = "GET",
-                RequestUrl = Constants.OfferApiEndPoint +  Constants.OfferApiGetOfferByCode + "/" + code,
+                RequestUrl = Constants.OfferApiEndPoint + Constants.OfferApiGetOfferByCode + "/" + code,
                 Payload = string.Empty,
                 Token = ""
             });

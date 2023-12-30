@@ -3,7 +3,6 @@ using BookMyStay.WebApp.Models;
 using BookMyStay.WebApp.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
@@ -86,18 +85,19 @@ namespace BookMyStay.WebApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private async Task SetSignedInUserIdentity(UserDTO userDTO) {
+        private async Task SetSignedInUserIdentity(UserDTO userDTO)
+        {
 
             var jwtObject = new JwtSecurityTokenHandler().ReadJwtToken(userDTO.Token);
             var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Sid, jwtObject.Claims.FirstOrDefault(x=> x.Type == JwtRegisteredClaimNames.Sid).Value));
-            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Email, jwtObject.Claims.FirstOrDefault(x=> x.Type == JwtRegisteredClaimNames.Email).Value));
-            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Name, jwtObject.Claims.FirstOrDefault(x=> x.Type == JwtRegisteredClaimNames.Name).Value));
+            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Sid, jwtObject.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sid).Value));
+            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Email, jwtObject.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Email).Value));
+            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Name, jwtObject.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Name).Value));
             identity.AddClaim(new Claim(ClaimTypes.Role, jwtObject.Claims.FirstOrDefault(x => x.Type == "role").Value));
 
             var principal = new ClaimsPrincipal(identity);
 
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,principal);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
         }
     }
 }

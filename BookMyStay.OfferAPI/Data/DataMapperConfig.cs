@@ -9,7 +9,7 @@ namespace BookMyStay.OfferAPI.Data
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<OfferDTO,Offer>().ReverseMap();
+                config.CreateMap<OfferDTO, Offer>().ReverseMap();
             });
 
             return mappingConfig;

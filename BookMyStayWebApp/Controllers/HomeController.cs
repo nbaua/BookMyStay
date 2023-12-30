@@ -4,7 +4,6 @@ using BookMyStay.WebApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 
@@ -65,13 +64,13 @@ namespace BookMyStay.WebApp.Controllers
         [ActionName("Detail")]
         public async Task<IActionResult> Detail(ListingDTO listingDTO)
         {
-            BookingItemDTO bookingItem= new BookingItemDTO()
+            BookingItemDTO bookingItem = new BookingItemDTO()
             {
                 UserId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value,
 
             };
 
-            BookingDetailsDTO bookingDetails= new BookingDetailsDTO()
+            BookingDetailsDTO bookingDetails = new BookingDetailsDTO()
             {
                 BookingItemId = bookingItem.BookingItemId,
                 ListingId = listingDTO.ListingId,
@@ -80,7 +79,7 @@ namespace BookMyStay.WebApp.Controllers
             };
 
             BookingDTO bookingDTO = new BookingDTO();
-            bookingDTO.BookingItemDTO= bookingItem;
+            bookingDTO.BookingItemDTO = bookingItem;
             bookingDTO.BookingDetailsDTO = new List<BookingDetailsDTO>() { bookingDetails };
 
 

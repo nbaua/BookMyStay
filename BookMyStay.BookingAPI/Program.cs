@@ -35,7 +35,7 @@ builder.Services.AddScoped<CrossAPIAuthTokenHandler>();//assign the same token t
 //for inter service communication
 builder.Services.AddScoped<IListingService, ListingService>();
 builder.Services.AddHttpClient("Listing",
-    c=>c.BaseAddress= new Uri(builder.Configuration["ServiceUrls:ListingAPI"])).AddHttpMessageHandler<CrossAPIAuthTokenHandler>();
+    c => c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:ListingAPI"])).AddHttpMessageHandler<CrossAPIAuthTokenHandler>();
 
 builder.Services.AddScoped<IOfferService, OfferService>();
 builder.Services.AddHttpClient("Offer",

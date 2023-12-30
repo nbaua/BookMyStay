@@ -2,7 +2,6 @@
 using BookMyStay.ListingAPI.Data;
 using BookMyStay.ListingAPI.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookMyStay.ListingAPI.Controllers
@@ -115,7 +114,7 @@ namespace BookMyStay.ListingAPI.Controllers
         {
             try
             {
-                Listing Listing = _dbContext.Listings.First(x=> x.ListingId == id);
+                Listing Listing = _dbContext.Listings.First(x => x.ListingId == id);
                 _dbContext.Listings.Remove(Listing);
                 _dbContext.SaveChanges();
 

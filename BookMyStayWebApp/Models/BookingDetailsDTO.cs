@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace BookMyStay.WebApp.Models
+﻿namespace BookMyStay.WebApp.Models
 {
     public class BookingDetailsDTO
     {
