@@ -2,6 +2,7 @@
 {
     public class PaymentItemDTO
     {
+        public int PaymentRequestId { get; set; }
         public int BookingItemId { get; set; }
         public string? UserId { get; set; } //Logged-in User GUID
         public string? OfferCode { get; set; } //If code is applied

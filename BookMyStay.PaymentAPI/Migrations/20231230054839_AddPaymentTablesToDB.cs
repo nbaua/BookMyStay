@@ -14,8 +14,9 @@ namespace BookMyStay.PaymentAPI.Migrations
                 name: "PaymentItem",
                 columns: table => new
                 {
-                    BookingItemId = table.Column<int>(type: "int", nullable: false)
+                    PaymentRequestId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    BookingItemId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OfferCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discount = table.Column<double>(type: "float", nullable: true),
@@ -29,7 +30,7 @@ namespace BookMyStay.PaymentAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PaymentItem", x => x.BookingItemId);
+                    table.PrimaryKey("PK_PaymentItem", x => x.PaymentRequestId);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,7 +51,7 @@ namespace BookMyStay.PaymentAPI.Migrations
                         name: "FK_PaymentItemDetails_PaymentItem_PaymentItemId",
                         column: x => x.PaymentItemId,
                         principalTable: "PaymentItem",
-                        principalColumn: "BookingItemId",
+                        principalColumn: "PaymentRequestId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
