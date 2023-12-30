@@ -9,6 +9,7 @@
         public static string OfferApiEndPoint { get; set; }
         public static string ListingApiEndPoint { get; set; }
         public static string BookingApiEndPoint { get; set; }
+        public static string PaymentApiEndPoint { get; set; }
         public static string DBLoggerApiEndPoint { get; set; }
 
         public static string BrokerMessageQueue = "BMSMessage";
@@ -36,6 +37,10 @@
         public const string OfferCreated = "Offer Created Successfully!";
         public const string OfferUpdated = "Offer Updated Successfully!";
         public const string OfferDeleted = "Offer Deleted Successfully!";
+        #endregion
+
+        #region Payment
+        public static string PaymentApiCreatePaymentRequest = "/api/payment/create";
         #endregion
 
         #region Listing
