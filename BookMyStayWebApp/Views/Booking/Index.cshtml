@@ -43,7 +43,7 @@
                                 @* <a class="btn btn-outline-success" asp-action="Manage" asp-route-id="@item.ListingId">
                         <i class="bi bi-pencil"></i>
                         </a> *@
-                                <a class="btn btn-outline-danger" asp-controller="Booking" asp-action="Delete" asp-route-id="@item.BookingDetailId" onclick="deleteConfirmation(event);">
+                                <a class="btn btn-outline-danger" asp-controller="Booking" asp-action="Delete" asp-route-id="@item.BookingItemId" onclick="deleteConfirmation(event);">
                                     <i class="bi bi-trash3"></i>
                                 </a>
                             </td>

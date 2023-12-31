@@ -73,13 +73,13 @@ namespace BookMyStay.BookingAPI.Controllers
             return _responseDTO;
         }
 
-        [HttpPost("Delete/{BookingDetailId}")]
-        public async Task<APIResponseDTO> Delete(int BookingDetailId)
+        [HttpPost("Delete/{BookingItemId}")]
+        public async Task<APIResponseDTO> Delete(int BookingItemId)
         {
             try
             {
-                BookingDetails bookingDetails = _dbContext.BookingDetails.First(d => d.BookingDetailId == BookingDetailId);
-                int TotalBookings = _dbContext.BookingDetails.Where(d => d.BookingDetailId == BookingDetailId).Count();
+                BookingDetails bookingDetails = _dbContext.BookingDetails.First(d => d.BookingItemId == BookingItemId);
+                int TotalBookings = _dbContext.BookingDetails.Where(d => d.BookingItemId == BookingItemId).Count();
 
                 _dbContext.BookingDetails.Remove(bookingDetails);
 
