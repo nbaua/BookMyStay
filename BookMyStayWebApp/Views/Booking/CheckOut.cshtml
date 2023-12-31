@@ -63,23 +63,23 @@
                     @if (!String.IsNullOrEmpty(@Model.BookingItemDTO.Discount.ToString()))
                     {
                         <div class="col mr-3 mt-3 fw-bold text-end">
-                            Billing Total: <i class="bi bi-currency-rupee"></i> <span class="text-dark">@(@Model.BookingItemDTO.BookingTotal + Model.BookingItemDTO.Discount)</span>
+                            Billing Total: <i class="bi bi-currency-rupee"></i><span class="text-dark">@(@Model.BookingItemDTO.BookingTotal + Model.BookingItemDTO.Discount)</span>
                         </div>
                         <div class="col mr-3 mt-3 fw-bold text-end">
-                            Billing Discount: <i class="bi bi-currency-rupee"></i> <span class="text-dark">@Model.BookingItemDTO.Discount</span>
+                            Billing Discount: <i class="bi bi-currency-rupee"></i><span class="text-dark">@Model.BookingItemDTO.Discount</span>
                         </div>
                     }
                     else
                     {
                         <div class="col mr-3 mt-3 fw-bold text-end">
-                            Billing Total: <i class="bi bi-currency-rupee"></i> <span class="text-dark">@(@Model.BookingItemDTO.BookingTotal + 0)</span>
+                            Billing Total: <i class="bi bi-currency-rupee"></i><span class="text-dark">@(@Model.BookingItemDTO.BookingTotal + 0)</span>
                         </div>
                         <div class="col mr-3 mt-3 fw-bold text-end">
-                            Billing Discount: <i class="bi bi-currency-rupee"></i> <span class="text-dark">0.00</span>
+                            Billing Discount: <i class="bi bi-currency-rupee"></i><span class="text-dark">0.00</span>
                         </div>
                     }
                     <div class="col pt-3 pb-3 mt-3 fw-bold text-end text-danger bg-light">
-                        Net Billing Amount: <i class="bi bi-currency-rupee"></i> <span class="text-dark">@Model.BookingItemDTO.BookingTotal</span>
+                        Net Billing Amount: <i class="bi bi-currency-rupee"></i><span class="text-dark">@Model.BookingItemDTO.BookingTotal</span>
                     </div>
                 </div>
                 <div class="row p-3">
