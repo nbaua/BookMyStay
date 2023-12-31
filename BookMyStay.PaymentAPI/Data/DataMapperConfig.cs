@@ -10,9 +10,11 @@ namespace BookMyStay.PaymentAPI.Data
             var mappingConfig = new MapperConfiguration(config =>
             {
                 config.CreateMap<PaymentItemDTO, BookingItemDTO>().ReverseMap();
-                config.CreateMap<PaymentItemDetails, BookingDetailsDTO>();
 
-                config.CreateMap<BookingDetailsDTO,PaymentItemDetails>().ForMember(x=>x.BookingPrice, y=> y.MapFrom(z => z.Listing.ListingPrice));
+                config.CreateMap<BookingDetailsDTO, PaymentItemDetailsDTO>().
+                ForMember(x=>x.BookingPrice, y=> y.MapFrom(z => z.Listing.ListingPrice));
+
+                config.CreateMap<PaymentItemDetailsDTO, BookingDetailsDTO>();
 
                 config.CreateMap<PaymentItem, PaymentItemDTO>().ReverseMap();
                 config.CreateMap<PaymentItemDetails, PaymentItemDetailsDTO>().ReverseMap();
