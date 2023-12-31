@@ -39,7 +39,7 @@ namespace BookMyStay.PaymentAPI.Controllers
                 paymentItemDTO.PaymentDate = DateTime.Now;
                 paymentItemDTO.PaymentStatus = "INPROCESS";
 
-                paymentItemDTO.PaymentItemDetails = _mapper.Map<IEnumerable<PaymentItemDetailsDTO>>(bookingDTO.BookingDetailsDTO);
+                paymentItemDTO.PaymentItemDetails = _mapper.Map<IEnumerable<PaymentItemDetailsDTO>>(bookingDTO.BookingDetailsDTO); //BookingDetailsDTO is null so need to refill
 
                 PaymentItem paymentItem = _dbContext.PaymentItem.Add(_mapper.Map<PaymentItem>(paymentItemDTO)).Entity;
                 await _dbContext.SaveChangesAsync();
