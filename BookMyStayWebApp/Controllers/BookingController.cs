@@ -80,19 +80,7 @@ namespace BookMyStay.WebApp.Controllers
             var email = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
             var userName = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
 
-            //await _MessageHandler.PublishMessage(Constants.BrokerPaymentQueue, bookingDTO.BookingItemDTO);
-            //var result = await _MessageHandler.ConsumeMessage(Constants.BrokerCheckoutQueue);
-
             APIResponseDTO response = await _DBLoggerService.LogToDB(Constants.BrokerCheckoutQueue);
-
-            //if (response.HasError)
-            //{
-            //    TempData["Error"] = response.Info;
-            //}
-            //else
-            //{
-            //    TempData["Success"] = "Logged into DB";
-            //}
 
             var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
             response = new APIResponseDTO();
@@ -112,7 +100,6 @@ namespace BookMyStay.WebApp.Controllers
             }
 
             return View(bookingDTO);
-
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -126,7 +113,22 @@ namespace BookMyStay.WebApp.Controllers
             }
             else
             {
-                TempData["Error"] = response.Info;
+                TempData["Error"] = response?.Info;
+                return View();
+            }
+        }
+        public async Task<IActionResult> DeleteAll(int id)
+        {
+            //var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
+            APIResponseDTO response = await _BookingService.DeleteAllBookingsAsync(id);
+            if (response != null && response.HasError == false)
+            {
+                TempData["Success"] = Constants.AllBookingRemoved;
+                return RedirectToAction("Index", "Booking");
+            }
+            else
+            {
+                TempData["Error"] = response?.Info;
                 return View();
             }
         }

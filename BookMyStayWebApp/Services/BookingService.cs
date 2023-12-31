@@ -23,12 +23,23 @@ namespace BookMyStay.WebApp.Services
             });
         }
 
-        public async Task<APIResponseDTO> DeleteBookingAsync(int bookingDetailId)
+        public async Task<APIResponseDTO> DeleteBookingAsync(int bookingItemId)
         {
             return await _service.SendRequestAsync(new APIRequestDTO()
             {
                 RequestType = "POST",
-                RequestUrl = Constants.BookingApiEndPoint + Constants.BookingApiDeleteBookingsByDetailsId + $"/{bookingDetailId}",
+                RequestUrl = Constants.BookingApiEndPoint + Constants.BookingApiDeleteBookingByItemId + $"/{bookingItemId}",
+                Payload = string.Empty,
+                Token = ""
+            });
+        }
+
+        public async Task<APIResponseDTO> DeleteAllBookingsAsync(int bookingDetailsId)
+        {
+            return await _service.SendRequestAsync(new APIRequestDTO()
+            {
+                RequestType = "POST",
+                RequestUrl = Constants.BookingApiEndPoint + Constants.BookingApiDeleteBookingsByDetailsId + $"/{bookingDetailsId}",
                 Payload = string.Empty,
                 Token = ""
             });

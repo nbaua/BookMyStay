@@ -7,6 +7,7 @@ namespace BookMyStay.WebApp.Services
         Task<APIResponseDTO> GetBookingsByUserIdAsync(string userId);
         Task<APIResponseDTO> ManageBookingAsync(BookingDTO bookingDTO);
         Task<APIResponseDTO> ManageOfferAsync(BookingDTO bookingDTO);
-        Task<APIResponseDTO> DeleteBookingAsync(int bookingDetailId);
+        Task<APIResponseDTO> DeleteBookingAsync(int bookingItemId);
+        Task<APIResponseDTO> DeleteAllBookingsAsync(int bookingDetailId);
     }
 }

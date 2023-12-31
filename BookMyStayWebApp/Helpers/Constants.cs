@@ -55,10 +55,12 @@
         #region Booking
         public static string BookingApiApplyOfferOnBooking = "/api/booking/ManageOffer";
         public static string BookingApiGetBookingsByUserId = "/api/booking/GetBookings";
-        public static string BookingApiDeleteBookingsByDetailsId = "/api/booking/Delete";
+        public static string BookingApiDeleteBookingByItemId = "/api/booking/Delete";
+        public static string BookingApiDeleteBookingsByDetailsId = "/api/booking/DeleteAll";
         public static string BookingApiManageBooking = "/api/booking/Manage";
 
         public const string BookingCreated = "Booking Created Successfully!";
+        public const string AllBookingRemoved = "All Booking Removed Successfully!";
         public const string BookingRemoved = "Booking Removed Successfully!";
         public const string OfferCodeApplied = "Offer Code Applied Successfully!";
         public const string OfferCodeNotApplied = "Offer Code Not Applied!";
