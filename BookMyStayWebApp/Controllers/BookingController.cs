@@ -12,15 +12,18 @@ namespace BookMyStay.WebApp.Controllers
     public class BookingController : Controller
     {
         private readonly IBookingService _BookingService;
+        private readonly IPaymentService _PaymentService;
         private readonly IMessageHandler _MessageHandler;
         private readonly IDBLoggerService _DBLoggerService;
 
-        public BookingController(IBookingService BookingService
-            , IMessageHandler MessageHandler,
+        public BookingController(IBookingService BookingService,
+            IPaymentService PaymentService,
+            IMessageHandler MessageHandler,
             IDBLoggerService DBLoggerService
             )
         {
             _BookingService = BookingService;
+            _PaymentService = PaymentService;
             _MessageHandler = MessageHandler;
             _DBLoggerService = DBLoggerService;
         }
@@ -44,6 +47,8 @@ namespace BookMyStay.WebApp.Controllers
         [Authorize] //Get the BookingDto and send the message to RabbitMQ
         public async Task<IActionResult> CheckOut()
         {
+
+            //publish the message to RabbitMq
             var name = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Name)?.FirstOrDefault()?.Value;
             var email = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
             var userName = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
@@ -70,6 +75,7 @@ namespace BookMyStay.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckOut(BookingDTO bookingDTO)
         {
+            //Step 1: save the published RabbitMq message to database, for future reporting
             var name = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Name)?.FirstOrDefault()?.Value;
             var email = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Email)?.FirstOrDefault()?.Value;
             var userName = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
@@ -79,16 +85,32 @@ namespace BookMyStay.WebApp.Controllers
 
             APIResponseDTO response = await _DBLoggerService.LogToDB(Constants.BrokerCheckoutQueue);
 
-            if (response.HasError)
+            //if (response.HasError)
+            //{
+            //    TempData["Error"] = response.Info;
+            //}
+            //else
+            //{
+            //    TempData["Success"] = "Logged into DB";
+            //}
+
+            var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
+            response = new APIResponseDTO();
+            response = await _BookingService.GetBookingsByUserIdAsync(userId);
+            if (response != null && response.HasError == false)
             {
-                TempData["Error"] = response.Info;
-            }
-            else
-            {
-                TempData["Success"] = "Logged into DB";
+                BookingDTO bDTO = JsonConvert.DeserializeObject<BookingDTO>(response.Result.ToString());
+                bookingDTO.BookingDetailsDTO = bDTO.BookingDetailsDTO;
             }
 
-            //to-do - redirect to stripe payment gateway
+            response = new APIResponseDTO();
+            response = await _PaymentService.CreatePaymentRequest(bookingDTO);
+
+            if (response != null && response.HasError == false)
+            {
+                PaymentItemDTO paymentItemDTO = JsonConvert.DeserializeObject<PaymentItemDTO>(response.Result.ToString());
+            }
+
             return View(bookingDTO);
 
         }
