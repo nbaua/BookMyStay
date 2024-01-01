@@ -41,6 +41,7 @@
 
         #region Payment
         public static string PaymentApiCreatePaymentRequest = "/api/payment/create";
+        public static string PaymentApiCreateSessionRequest = "/api/payment/createSession";
         #endregion
 
         #region Listing

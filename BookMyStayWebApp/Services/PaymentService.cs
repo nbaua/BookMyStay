@@ -21,6 +21,17 @@ namespace BookMyStay.WebApp.Services
                 Payload = bookingDTO,
                 Token = ""
             }); ;
+        } 
+        
+        public async Task<APIResponseDTO> CreatePaymentSession(PaymentGatewayRequestDTO paymentGatewayRequestDTO)
+        {
+            return await _service.SendRequestAsync(new APIRequestDTO() //.SendRequestAsync<APIResponseDTO>(new APIRequestDTO()
+            {
+                RequestType = "POST",
+                RequestUrl = Constants.PaymentApiEndPoint + Constants.PaymentApiCreateSessionRequest,
+                Payload = paymentGatewayRequestDTO,
+                Token = ""
+            }); ;
         }
     }
 }

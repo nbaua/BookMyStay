@@ -97,9 +97,32 @@ namespace BookMyStay.WebApp.Controllers
             if (response != null && response.HasError == false)
             {
                 PaymentItemDTO paymentItemDTO = JsonConvert.DeserializeObject<PaymentItemDTO>(response.Result.ToString());
+
+                string domainName = string.Concat(Request.Scheme, "://", Request.Host.Value.Trim(), "/");
+                PaymentGatewayRequestDTO paymentGatewayRequestDTO = new PaymentGatewayRequestDTO()
+                {
+                    SuccessUrl = domainName + "Booking/PaymentSuccess?paymentId=" + paymentItemDTO.BookingItemId,
+                    FailureUrl = domainName + "Booking/CheckOut",
+                    PaymentItem = paymentItemDTO,
+                };
+
+                var paymentGatewayResponse = await _PaymentService.CreatePaymentSession(paymentGatewayRequestDTO);
+                
+                if (paymentGatewayResponse.Result != null)
+                {
+                    PaymentGatewayRequestDTO apiResponse = JsonConvert.DeserializeObject<PaymentGatewayRequestDTO>(paymentGatewayResponse.Result.ToString());
+                    Response.Headers.Add("Location",  apiResponse.SessionUrl);
+                    return new StatusCodeResult(303); //Redirection
+                }
             }
 
             return View(bookingDTO);
+        }
+
+        public async Task<IActionResult> PaymentSuccess(int paymentId)
+        {
+            return View(paymentId);
+
         }
 
         public async Task<IActionResult> Delete(int id)
