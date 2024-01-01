@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Stripe;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -97,6 +98,10 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = Audience
     };
 });
+#endregion
+
+#region STRIPE Payment Gateway Config
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 #endregion
 
 var app = builder.Build();
