@@ -10,7 +10,7 @@ namespace BookMyStay.PaymentAPI.Models
         public string? UserId { get; set; } //Logged-in User GUID
         public string? OfferCode { get; set; } //If code is applied
         public double? Discount { get; set; }
-        public double BookingTotal { get; set; }//Final amout as Payment - we already diducted the discount
+        public double BookingTotal { get; set; }//Final amount as Payment - we already deducted the discount
         public string? Name { get; set; }
         public string? Email { get; set; }
 
