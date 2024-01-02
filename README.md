@@ -18,15 +18,14 @@ Main Features
 - Clean Architecture and .Net core best practices implemented
 - Listing and CRUD operations, Managed using dedicated SQL server instances, per service.
 - Secured end-points using Microsoft Identity Services.
+- Implement payment gateway - Stripe API or equivalent
 - Intuitive UI, Clean Bootstrap 5 based simple UI for easy customization
 
 WIP/Todos
-- Order Tracking And Scheduling - At present the bookings are just simple order placement, without date range specified.
-- Gateway implementation for all microservices (currently kept accessible using API endpoints - todo - invoke via Gateway)
+- Booking Scheduling - At present the bookings are just simple order placement, without date range specified.
 - Message Broker is to be updated - plans to change to Azure Service Bus 
-- Implement payment gateway - Stripe API or equivalent
-- 
-- 
+
+
 ## Architecturual Overview
 
 ![](bms_arch.png)
