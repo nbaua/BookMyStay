@@ -3,6 +3,7 @@ using BookMyStay.OfferAPI.Data;
 using BookMyStay.OfferAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
 
 namespace BookMyStay.OfferAPI.Controllers
 {
@@ -89,9 +90,22 @@ namespace BookMyStay.OfferAPI.Controllers
         {
             try
             {
+                //step 1: update Offer for web
                 Offer offer = _mapper.Map<Offer>(offerDto);
                 _dbContext.Offers.Add(offer);
                 _dbContext.SaveChanges();
+
+                //step 2: update the Offer on Stripe payment gateway
+                var options = new CouponCreateOptions
+                {
+                    PercentOff = (decimal)offer.OfferDiscountPerc, //to-check id *100 hack is needed
+                    Name = offer.OfferCode,
+                    Currency = "INR",
+                    Id = offer.OfferCode.ToUpper(),
+
+                };
+                var service = new CouponService();
+                service.Create(options);
 
                 _responseDTO.Result = _mapper.Map<OfferDTO>(offer);
                 _responseDTO.Info = "Success";
@@ -135,9 +149,15 @@ namespace BookMyStay.OfferAPI.Controllers
         {
             try
             {
+                //step 1: delete offer
                 Offer offer = _dbContext.Offers.First(x => x.OfferId == id);
                 _dbContext.Offers.Remove(offer);
                 _dbContext.SaveChanges();
+
+                //step 2: delete the Offer on Stripe payment gateway
+                
+                var service = new CouponService();
+                service.Delete(offer.OfferCode);
 
                 _responseDTO.Result = _mapper.Map<OfferDTO>(offer);
                 _responseDTO.Info = "Success";
