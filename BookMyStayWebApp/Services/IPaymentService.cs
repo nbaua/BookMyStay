@@ -6,5 +6,6 @@ namespace BookMyStay.WebApp.Services
     {
         Task<APIResponseDTO> CreatePaymentRequest(BookingDTO bookingDTO); 
         Task<APIResponseDTO> CreatePaymentSession(PaymentGatewayRequestDTO paymentGatewayRequestDTO); 
+        Task<APIResponseDTO> ValidatePaymentSession(int BookingItemId); 
     }
 }

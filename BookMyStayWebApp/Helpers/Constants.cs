@@ -42,6 +42,11 @@
         #region Payment
         public static string PaymentApiCreatePaymentRequest = "/api/payment/create";
         public static string PaymentApiCreateSessionRequest = "/api/payment/createSession";
+        public static string PaymentApiValidateSessionRequest = "/api/payment/validateSession";
+
+        public const string PaymentReceived = "Payment Received Successfully!";
+        public const string PaymentRejected= "Payment Can Not Be Received!";
+
         #endregion
 
         #region Listing

@@ -33,5 +33,16 @@ namespace BookMyStay.WebApp.Services
                 Token = ""
             }); ;
         }
+
+        public async Task<APIResponseDTO> ValidatePaymentSession(int BookingItemId)
+        {
+            return await _service.SendRequestAsync(new APIRequestDTO() //.SendRequestAsync<APIResponseDTO>(new APIRequestDTO()
+            {
+                RequestType = "POST",
+                RequestUrl = Constants.PaymentApiEndPoint + Constants.PaymentApiValidateSessionRequest,
+                Payload = BookingItemId,
+                Token = ""
+            }); ;
+        }
     }
 }

@@ -5,6 +5,8 @@ using BookMyStay.PaymentAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Stripe;
 using Stripe.Checkout;
 
@@ -78,7 +80,11 @@ namespace BookMyStay.PaymentAPI.Controllers
                     Mode = "payment",
                 };
 
-                //hack for Indian payment accept
+                //hack for Indian payment accept - under TEST MODE
+                //For other card numbers like 4242 4242 4242 4242 - Following Exception will occur.
+                //As per Indian regulations, only registered Indian businesses (i.e. sole proprietorships,
+                //limited liability partnerships and companies, but not individuals) can accept international payments.
+                //More info here: https://stripe.com/docs/india-exports
                 //Enter 4000 0035 6000 0008 as a Credit Card Number
 
                 if (!string.IsNullOrEmpty(paymentGatewayRequestDTO.PaymentItem.OfferCode) && paymentGatewayRequestDTO.PaymentItem.Discount > 0)
@@ -143,5 +149,41 @@ namespace BookMyStay.PaymentAPI.Controllers
             }
             return _responseDTO;
         }
+
+        [Authorize]
+        [HttpPost("validateSession")]
+        public async Task<APIResponseDTO> ValidateSession([FromBody] int BookingItemId)
+        {
+            try
+            {
+                PaymentItem paymentItem = await _dbContext.PaymentItem.FirstAsync(x => x.BookingItemId == BookingItemId);
+                var service = new SessionService();
+                Session session = await service.GetAsync(paymentItem.StripeSessionId);
+
+                if (string.IsNullOrEmpty(session.PaymentIntentId) == false)
+                {
+                    PaymentIntentService paymentIntentService = new PaymentIntentService();
+                    PaymentIntent paymentIntent = await paymentIntentService.GetAsync(session.PaymentIntentId);
+
+                    if (paymentIntent.Status.ToLower() == "succeeded") {
+                        paymentItem.PaymentIntentId = paymentIntent.Id;
+                        paymentItem.PaymentStatus = paymentIntent.Status.ToUpper();
+                        _dbContext.SaveChanges();
+                    } ;
+
+                    _responseDTO.HasError = false;
+                    _responseDTO.Info = "";
+                    _responseDTO.Result = _mapper.Map<PaymentItemDTO>(paymentItem);
+                }
+            }
+            catch (Exception ex)
+            {
+                _responseDTO.HasError = true;
+                _responseDTO.Info = ex.Message;
+                _responseDTO.Result = null;
+            }
+            return _responseDTO;
+        }
     }
+
 }
