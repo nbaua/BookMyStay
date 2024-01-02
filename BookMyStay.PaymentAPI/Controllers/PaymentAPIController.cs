@@ -75,8 +75,24 @@ namespace BookMyStay.PaymentAPI.Controllers
                     SuccessUrl = paymentGatewayRequestDTO.SuccessUrl,
                     CancelUrl = paymentGatewayRequestDTO.FailureUrl,
                     LineItems = new List<SessionLineItemOptions>(),
-                    Mode = "payment"
+                    Mode = "payment",
                 };
+
+                //hack for Indian payment accept
+                //Enter 4000 0035 6000 0008 as a Credit Card Number
+
+                if (!string.IsNullOrEmpty(paymentGatewayRequestDTO.PaymentItem.OfferCode) && paymentGatewayRequestDTO.PaymentItem.Discount > 0)
+                {
+                    var offerDiscounts = new List<SessionDiscountOptions>()
+                    {
+                        new SessionDiscountOptions()
+
+                        {
+                            Coupon = paymentGatewayRequestDTO.PaymentItem.OfferCode
+                        }
+                    };
+                    options.Discounts = offerDiscounts;
+                }
 
                 //Adding each booking item into the payment gateway request
                 foreach (var item in paymentGatewayRequestDTO.PaymentItem.PaymentItemDetails)
@@ -85,7 +101,7 @@ namespace BookMyStay.PaymentAPI.Controllers
                     {
                         PriceData = new SessionLineItemPriceDataOptions
                         {
-                            UnitAmountDecimal = Convert.ToDecimal(item.BookingPrice) *100, //*100 is STRIPE SPECIFIC HACK - Else request fails
+                            UnitAmountDecimal = Convert.ToDecimal(item.BookingPrice) * 100, //*100 is STRIPE SPECIFIC HACK - Else request fails
                             Currency = "INR",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
@@ -94,7 +110,7 @@ namespace BookMyStay.PaymentAPI.Controllers
                                 Images = new List<string> { item.Listing.ImageUrl },
                             }
                         },
-                        Quantity= item.DayOfStay,
+                        Quantity = item.DayOfStay,
                     };
 
                     options.LineItems.Add(PaymentLineItems);
@@ -126,7 +142,6 @@ namespace BookMyStay.PaymentAPI.Controllers
                 _responseDTO.Result = null;
             }
             return _responseDTO;
-
         }
     }
 }
