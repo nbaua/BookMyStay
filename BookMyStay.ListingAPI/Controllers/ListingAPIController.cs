@@ -43,6 +43,7 @@ namespace BookMyStay.ListingAPI.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [Authorize]
         public APIResponseDTO GetById(int id)
         {
 
